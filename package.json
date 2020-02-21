@@ -6,15 +6,12 @@
   "version": "1.0.0",
   "publisher": "snyk",
   "scripts": {
-    "dev": "parcel watch --target node src/extension.js",
-    "build": "parcel build --target node src/extension.js",
-    "vscode:prepublish": "npm run build",
-    "compile": "tslint {src}/**/*.ts && tsc -watch -p ./",
-    "postinstall": "node ./node_modules/vscode/bin/install",
-    "pretest": "npm run vscode:prepublish",
-    "precommit": "npm run vscode:prepublish",
-    "prebublish": "npm run vscode:prepublish",
-    "__test": "node ./node_modules/vscode/bin/test"
+    "DISABLED_postinstall": "node ./node_modules/vscode/bin/install",
+    "check": "eslint src/* && prettier -c ./src/**/*",
+    "build": "webpack --mode production",
+    "vscode:prepublish": "npm run check && npm run build",
+    "webpack": "webpack --mode development",
+    "dev": "webpack --mode development --watch"
   },
   "author": "Remy Sharp <remy@leftlogic.com>",
   "engines": {
@@ -97,10 +94,9 @@
     "@types/vscode": "1.42.0",
     "eslint": "^6.8.0",
     "nodemon": "^2.0.2",
-    "parcel-bundler": "^1.12.4",
     "prettier": "^1.19.1",
-    "tslint": "^5.5.0",
-    "typescript": "^2.4.1"
+    "webpack": "^4.41.6",
+    "webpack-cli": "^3.3.11"
   },
   "galleryBanner": {
     "color": "#1C78C0",
