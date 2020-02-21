@@ -105,5 +105,13 @@
   "galleryBanner": {
     "color": "#1C78C0",
     "theme": "dark"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/snyk/vulncost.git"
+  },
+  "bugs": {
+    "url": "https://github.com/snyk/vulncost/issues"
+  },
+  "homepage": "https://github.com/snyk/vulncost#readme"
 }
