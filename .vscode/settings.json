@@ -1,0 +1,31 @@
+// Place your settings in this file to overwrite default and user settings.
+{
+  "files.exclude": {
+    "out": false // set this to true to hide the "out" folder with the compiled JS files
+  },
+  "tslint.autoFixOnSave": true,
+  "prettier.bracketSpacing": false,
+
+  "search.exclude": {
+    "out": true, // set this to false to include "out" folder in search results
+    "dist": true,
+    "coverage": true,
+    "**/node_modules": true,
+    "**/bower_components": true
+  },
+  "javascript.validate.enable": false,
+  "files.trimTrailingWhitespace": true,
+  "editor.tabSize": 2,
+  "html.format.indentInnerHtml": true,
+  "html.format.extraLiners": "",
+  "files.insertFinalNewline": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "cSpell.words": [
+    "Snyk",
+    "snyk's",
+    "vuln",
+    "vulns"
+  ]
+}

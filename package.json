@@ -1,0 +1,109 @@
+{
+  "name": "vscode-vuln-cost",
+  "displayName": "Vulnerability Cost",
+  "description": "Display imported vulnerabilities in VS Code",
+  "license": "MIT",
+  "version": "1.0.0",
+  "publisher": "snyk",
+  "scripts": {
+    "dev": "parcel watch --target node src/extension.js",
+    "build": "parcel build --target node src/extension.js",
+    "vscode:prepublish": "npm run build",
+    "compile": "tslint {src}/**/*.ts && tsc -watch -p ./",
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "pretest": "npm run vscode:prepublish",
+    "precommit": "npm run vscode:prepublish",
+    "prebublish": "npm run vscode:prepublish",
+    "__test": "node ./node_modules/vscode/bin/test"
+  },
+  "author": "Remy Sharp <remy@leftlogic.com>",
+  "engines": {
+    "vscode": "^1.42.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onLanguage:javascript",
+    "onLanguage:javascriptreact",
+    "onLanguage:typescript",
+    "onLanguage:typescriptreact"
+  ],
+  "keywords": [
+    "import",
+    "require",
+    "vuln",
+    "vulnerability",
+    "security"
+  ],
+  "main": "./dist/extension",
+  "contributes": {
+    "configuration": {
+      "type": "object",
+      "title": "Snyk vulnerability cost configuration",
+      "properties": {
+        "vulnCost.typescriptExtensions": {
+          "type": "array",
+          "default": [
+            "\\.tsx?$"
+          ],
+          "description": "File extensions to be parsed by the Typescript parser"
+        },
+        "vulnCost.javascriptExtensions": {
+          "type": "array",
+          "default": [
+            "\\.jsx?$"
+          ],
+          "description": "File extensions to be parsed by the Javascript parser"
+        },
+        "vulnCost.showCalculatingDecoration": {
+          "type": "boolean",
+          "default": true,
+          "description": "Display the 'calculating' decoration when starting to check vulnerability"
+        },
+        "vulnCost.debug": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable debug logging"
+        },
+        "vulnCost.timeout": {
+          "type": "number",
+          "default": 10000,
+          "description": "Size calculation timeout in milliseconds (requires restart)"
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "vulnCost.toggle",
+        "title": "Toggle vuln cost"
+      }
+    ]
+  },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "dependencies": {
+    "@babel/parser": "^7.0.0",
+    "@babel/traverse": "^7.0.0",
+    "@babel/types": "^7.0.0",
+    "axios": "^0.19.2",
+    "find-package-json": "^1.2.0",
+    "validate-npm-package-name": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^6.0.40",
+    "@types/vscode": "1.42.0",
+    "eslint": "^6.8.0",
+    "nodemon": "^2.0.2",
+    "parcel-bundler": "^1.12.4",
+    "prettier": "^1.19.1",
+    "tslint": "^5.5.0",
+    "typescript": "^2.4.1"
+  },
+  "galleryBanner": {
+    "color": "#1C78C0",
+    "theme": "dark"
+  }
+}
