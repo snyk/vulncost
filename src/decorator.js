@@ -1,4 +1,4 @@
-import { workspace, window, Range, Position } from 'vscode';
+import { workspace, window, Range, Position, ThemeColor } from 'vscode';
 
 import logger from './logger';
 
@@ -36,23 +36,28 @@ function getDecorationMessage(packageInfo) {
   return decorationMessage;
 }
 
-function getDecorationColor(size) {
-  const configuration = workspace.getConfiguration('vulnCost');
-  const sizeInKB = size / 1024;
-  if (sizeInKB < configuration.smallPackageSize) {
-    return configuration.smallPackageColor;
-  } else if (sizeInKB < configuration.mediumPackageSize) {
-    return configuration.mediumPackageColor;
-  } else {
-    return configuration.largePackageColor;
-  }
-}
+// function getDecorationColor(size) {
+//   const configuration = workspace.getConfiguration('vulnCost');
+//   const sizeInKB = size / 1024;
+//   if (sizeInKB < configuration.smallPackageSize) {
+//     return configuration.smallPackageColor;
+//   } else if (sizeInKB < configuration.mediumPackageSize) {
+//     return configuration.mediumPackageColor;
+//   } else {
+//     return configuration.largePackageColor;
+//   }
+// }
 
-function decorate(text, packageInfo, color = getDecorationColor(0)) {
+function decorate(text, packageInfo) {
   const { fileName, line } = packageInfo;
   logger.log(
     `Setting Decoration: ${text}, ${JSON.stringify(packageInfo.name, null, 2)}`
   );
+
+  let color = new ThemeColor(
+    text.includes('vuln') ? 'errorForeground' : 'foreground'
+  );
+
   decorations[fileName][line] = {
     renderOptions: { after: { contentText: text, color } },
     range: new Range(
