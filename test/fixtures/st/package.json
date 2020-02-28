@@ -1,0 +1,6 @@
+{
+  "license": "MIT",
+  "dependencies": {
+    "st": "^1.2.1"
+  }
+}
