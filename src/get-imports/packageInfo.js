@@ -25,7 +25,7 @@ export function getPackageKey(pkg) {
   // if the package doesn't start with the package name we were looking for
   // then it means it's not locally installed, so let's assume they're going
   // to install and set version to "latest"
-  if (!packageInfo.name.toLowerCase().startsWith(name)) {
+  if (!packageInfo.name || !packageInfo.name.toLowerCase().startsWith(name)) {
     packageInfo = {
       name,
       version: 'latest',
@@ -70,15 +70,17 @@ export default function lookupVulns(key) {
   return debouncePromise(key, (resolve, reject) => {
     axios
       .get(`https://snyk.io/test/npm/${key}?type=json`)
-      .then(res => {
-        if (typeof res.data === 'string') {
+      .then(({ data }) => {
+        if (typeof data === 'string') {
           // bug on snyk's side, returning a string for 404
           return null;
         }
 
-        return res.data;
+        return data;
       })
       .then(resolve)
-      .catch(reject);
+      .catch(e => {
+        reject(e);
+      });
   });
 }
