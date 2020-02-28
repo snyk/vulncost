@@ -31,22 +31,9 @@ function getDecorationMessage(packageInfo) {
   }
 
   let decorationMessage = packageInfo.vulns.totalVulns + ' vulns';
-  // const configuration = workspace.getConfiguration('vulnCost');
 
   return decorationMessage;
 }
-
-// function getDecorationColor(size) {
-//   const configuration = workspace.getConfiguration('vulnCost');
-//   const sizeInKB = size / 1024;
-//   if (sizeInKB < configuration.smallPackageSize) {
-//     return configuration.smallPackageColor;
-//   } else if (sizeInKB < configuration.mediumPackageSize) {
-//     return configuration.mediumPackageColor;
-//   } else {
-//     return configuration.largePackageColor;
-//   }
-// }
 
 function decorate(text, packageInfo) {
   const { fileName, line } = packageInfo;
@@ -54,12 +41,16 @@ function decorate(text, packageInfo) {
     `Setting Decoration: ${text}, ${JSON.stringify(packageInfo.name, null, 2)}`
   );
 
+  const hasVuln = text.includes('vuln');
+
   let color = new ThemeColor(
-    text.includes('vuln') ? 'errorForeground' : 'foreground'
+    hasVuln ? 'errorForeground' : 'foreground'
   );
 
+  let fontWeight = hasVuln ?  "bold" : "normal";
+
   decorations[fileName][line] = {
-    renderOptions: { after: { contentText: text, color } },
+    renderOptions: { after: { contentText: text, color, fontWeight } },
     range: new Range(
       new Position(line - 1, 1024),
       new Position(line - 1, 1024)
