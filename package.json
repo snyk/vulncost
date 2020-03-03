@@ -87,6 +87,7 @@
     "@babel/types": "^7.0.0",
     "axios": "^0.19.2",
     "find-package-json": "^1.2.0",
+    "snyk": "^1.297.3",
     "validate-npm-package-name": "^3.0.0"
   },
   "devDependencies": {
@@ -109,5 +110,8 @@
   "bugs": {
     "url": "https://github.com/snyk/vulncost/issues"
   },
-  "homepage": "https://github.com/snyk/vulncost#readme"
+  "homepage": "https://github.com/snyk/vulncost#readme",
+  "directories": {
+    "test": "test"
+  }
 }
