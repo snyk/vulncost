@@ -1,11 +1,11 @@
 import { dirname, join } from 'path';
 import finder from 'find-package-json';
-import axios from 'axios';
+import test from './testVuln';
 
 import { DebounceError, debouncePromise } from './debouncePromise';
 
 let cache = {};
-const vulnCache = {};
+let vulnCache = {};
 const projectCache = {};
 
 export function getPackageKey(pkg) {
@@ -32,11 +32,20 @@ export function getPackageKey(pkg) {
     };
   }
 
-  return `${packageInfo.name}/${packageInfo.version}`;
+  return { name: packageInfo.name, version: packageInfo.version };
+}
+
+function keyed(packageInfo) {
+  return `${packageInfo.name}@${packageInfo.version}`;
 }
 
 export function clearPackageCache() {
   cache = {};
+  vulnCache = {};
+}
+
+export function getPackageFromCache(key) {
+  return vulnCache[key];
 }
 
 export async function getPackageInfo(pkg) {
@@ -46,13 +55,12 @@ export async function getPackageInfo(pkg) {
     return pkg;
   }
 
-  const key = cache[pkg.string];
+  const key = keyed(cache[pkg.string]);
 
   if (vulnCache[key] === undefined || vulnCache[key] instanceof Promise) {
     try {
-      vulnCache[key] = vulnCache[key] || lookupVulns(cache[pkg.string]);
+      vulnCache[key] = vulnCache[key] || lookupVulns(key, cache[pkg.string]);
       vulnCache[key] = await vulnCache[key];
-      // saveVulnCache();
     } catch (e) {
       if (e === DebounceError) {
         delete vulnCache[key];
@@ -66,21 +74,10 @@ export async function getPackageInfo(pkg) {
   return { ...pkg, vulns: vulnCache[key] };
 }
 
-export default function lookupVulns(key) {
+export default function lookupVulns(key, pkg) {
   return debouncePromise(key, (resolve, reject) => {
-    axios
-      .get(`https://snyk.io/test/npm/${key}?type=json`)
-      .then(({ data }) => {
-        if (typeof data === 'string') {
-          // bug on snyk's side, returning a string for 404
-          return null;
-        }
-
-        return data;
-      })
+    test(pkg)
       .then(resolve)
-      .catch(e => {
-        reject(e);
-      });
+      .catch(reject);
   });
 }

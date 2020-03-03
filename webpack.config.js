@@ -18,6 +18,7 @@ const config = {
   // devtool: 'source-map',
   externals: {
     vscode: 'commonjs vscode', // the vscode-module is created on-the-fly and must be excluded.
+    '@snyk/configstore': 'commonjs @snyk/configstore'
   },
   resolve: {
     extensions: ['.ts', '.js'],

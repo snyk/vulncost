@@ -3,7 +3,7 @@ import {
   getImports,
   JAVASCRIPT,
   TYPESCRIPT,
-} from './get-imports';
+} from './getImports';
 import * as vscode from 'vscode';
 import { calculated, flushDecorations, clearDecorations } from './decorator';
 import logger from './logger';
@@ -74,6 +74,7 @@ export function activate(context) {
       })
     );
   } catch (e) {
+    console.log(e.message);
     logger.log('wrapping error: ' + e);
   }
 }
@@ -82,9 +83,11 @@ export function deactivate() {}
 
 function createPackageWatcher(fileName) {
   if (packageWatcher[fileName]) {
+    console.log('watching already', fileName);
     return;
   }
 
+  // FIXME investigate why this doesn't work in a multi-root workspace (might be a vscode bug)
   const watcher = vscode.workspace.createFileSystemWatcher(fileName);
   watcher.onDidChange(() => {
     clearPackageCache();

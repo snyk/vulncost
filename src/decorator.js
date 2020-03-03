@@ -26,11 +26,11 @@ export function calculated(packageInfo) {
 }
 
 function getDecorationMessage(packageInfo) {
-  if (!packageInfo.vulns || packageInfo.vulns.totalVulns <= 0) {
+  if (!packageInfo.vulns || packageInfo.vulns.count <= 0) {
     return '';
   }
 
-  let decorationMessage = packageInfo.vulns.totalVulns + ' vulns';
+  let decorationMessage = packageInfo.vulns.count + ' vulns';
 
   return decorationMessage;
 }
