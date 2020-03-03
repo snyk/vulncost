@@ -29,11 +29,15 @@ function createDiagnostic(doc, pkg) {
     pkg.loc.end.column
   );
 
+  console.log(pkg);
+
   let diagnostic = new vscode.Diagnostic(
     range,
-    pkg.vulns.pageDesc,
+    "⛔" + pkg.vulns.resultTitle + " has " + pkg.vulns.totalVulns + " vulns" + "\nConnect your project to Snyk to find and fix vulnerabilities",
     vscode.DiagnosticSeverity.Warning
   );
+
+  console.log(diagnostic);
   diagnostic.code = KEY_MENTION;
   return diagnostic;
 }
