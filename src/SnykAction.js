@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import { isAuthed } from './getImports/snykAPI';
-import { getPackageFromCache } from './getImports/packageInfo';
+// import { getPackageFromCache } from './getImports/packageInfo';
 import { KEY_MENTION, getPackageFromMessage } from './diagnostics';
 
 function createOpenBrowserAction({
@@ -25,30 +25,31 @@ function createOpenBrowserAction({
   return action;
 }
 
-function createPackageUpgradeAction({
-  vulnerabilities,
-  diagnostic,
-  isPreferred,
-}) {
-  const packages = vulnerabilities
-    .filter(_ => _.isUpgradeable)
-    .map(_ => _.upgradePath[0])
-    .join(' ');
+// TODO will restore later
+// function createPackageUpgradeAction({
+//   vulnerabilities,
+//   diagnostic,
+//   isPreferred,
+// }) {
+//   const packages = vulnerabilities
+//     .filter(_ => _.isUpgradeable)
+//     .map(_ => _.upgradePath[0])
+//     .join(' ');
 
-  const action = new vscode.CodeAction(
-    'Run Snyk remediation',
-    vscode.CodeActionKind.Refactor
-  );
+//   const action = new vscode.CodeAction(
+//     'Run Snyk remediation',
+//     vscode.CodeActionKind.Refactor
+//   );
 
-  action.command = {
-    command: 'vscode.open',
-    title: 'Run Snyk remediation',
-    arguments: [],
-  };
-  action.diagnostics = [diagnostic];
-  action.isPreferred = isPreferred;
-  return action;
-}
+//   action.command = {
+//     command: 'vscode.open',
+//     title: 'Run Snyk remediation',
+//     arguments: [],
+//   };
+//   action.diagnostics = [diagnostic];
+//   action.isPreferred = isPreferred;
+//   return action;
+// }
 
 /**
  * Provides code actions corresponding to diagnostic problems.
@@ -60,7 +61,7 @@ export class SnykVulnInfo {
       .filter(diagnostic => diagnostic.code === KEY_MENTION)
       .map(diagnostic => {
         const pkg = getPackageFromMessage(diagnostic.message);
-        const vulns = getPackageFromCache(pkg);
+        // const vulns = getPackageFromCache(pkg);
 
         const res = [
           createOpenBrowserAction({
