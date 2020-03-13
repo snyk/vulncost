@@ -1,8 +1,13 @@
 const Configstore = require('@snyk/configstore');
 const userConfig = new Configstore('snyk');
 
-const api = process.env.SNYK_TOKEN || userConfig.get('api');
+let token = process.env.SNYK_TOKEN || userConfig.get('api');
 
-export const isAuthed = !!api;
+export const isAuthed = () => !!token;
 
-export default api;
+export const setToken = t => {
+  userConfig.set('api', t);
+  token = t;
+};
+
+export default token;

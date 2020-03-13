@@ -3,7 +3,7 @@
   "displayName": "Vulnerability Cost",
   "description": "Display imported vulnerabilities in VS Code",
   "license": "MIT",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "publisher": "snyk",
   "scripts": {
     "DISABLED_postinstall": "node ./node_modules/vscode/bin/install",
@@ -74,6 +74,10 @@
       {
         "command": "vulnCost.toggle",
         "title": "Toggle vuln cost"
+      },
+      {
+        "command": "vulnCost.signIn",
+        "title": "Signup/create a Snyk account"
       }
     ]
   },
@@ -89,6 +93,7 @@
     "axios": "^0.19.2",
     "find-package-json": "^1.2.0",
     "snyk": "^1.297.3",
+    "uuid": "^7.0.2",
     "validate-npm-package-name": "^3.0.0"
   },
   "devDependencies": {

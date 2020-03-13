@@ -8,7 +8,10 @@ import * as vscode from 'vscode';
 import { calculated, flushDecorations, clearDecorations } from './decorator';
 import logger from './logger';
 import { SnykVulnInfo } from './SnykAction';
+import { isAuthed, setToken } from './getImports/snykAPI';
 import { refreshDiagnostics } from './diagnostics';
+import { v4 as uuidv4 } from 'uuid';
+import authenticate from './authenticate';
 
 const { window, workspace, commands } = vscode;
 
@@ -18,7 +21,12 @@ let packageWatcher = {};
 export function activate(context) {
   try {
     logger.init(context);
-    logger.log('starting...');
+
+    if (isAuthed()) {
+      logger.log('🔒 Using Snyk credentials');
+    } else {
+      logger.log('🔓 Using anonymous API');
+    }
 
     context.subscriptions.push(
       vscode.languages.registerCodeActionsProvider(
@@ -71,6 +79,36 @@ export function activate(context) {
           deactivate();
           clearDecorations();
         }
+      })
+    );
+
+    context.subscriptions.push(
+      commands.registerCommand('vulnCost.signIn', () => {
+        if (isAuthed()) {
+          window.showInformationMessage(
+            'You are already connected to your Snyk account'
+          );
+          return;
+        }
+
+        const token = uuidv4();
+        const url =
+          'https://app.snyk.io/login?utm_medium=ide&utm_source=vscode&utm_campaign=vuln_cost&token=' +
+          token;
+
+        vscode.env.openExternal(vscode.Uri.parse(url)).then(() => {
+          authenticate(token)
+            .then(res => {
+              setToken(res.data.api);
+              window.showInformationMessage(
+                'Your Snyk account is now connected.'
+              );
+            })
+            .catch(e => {
+              logger.log(e.message);
+              window.showErrorMessage(e.message);
+            });
+        });
       })
     );
   } catch (e) {

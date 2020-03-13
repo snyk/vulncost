@@ -1,5 +1,6 @@
 import snykAPI, { isAuthed } from './snykAPI';
 import axios from 'axios';
+import logger from '../logger';
 
 const API_ROOT = 'https://snyk.io/api/v1/vuln/npm/';
 
@@ -9,10 +10,12 @@ function testNoAuth(key) {
     .then(({ data }) => {
       if (typeof data === 'string') {
         // bug on snyk's side, returning a string for 404
+        logger.log('bad return on ' + key);
         return null;
       }
 
       return {
+        ok: data.totalVulns === 0,
         packageName: data.resultTitle,
         count: data.totalVulns,
       };
@@ -49,12 +52,9 @@ function testWithAuth(pkg) {
     });
 }
 
-export default async function test(pkg) {
-  if (isAuthed) {
-    return testWithAuth(pkg).then(res => {
-      console.log('full auth', res);
-      return res;
-    });
+export default function test(pkg) {
+  if (isAuthed()) {
+    return testWithAuth(pkg);
   } else {
     return testNoAuth(`${pkg.name}/${pkg.version}`);
   }

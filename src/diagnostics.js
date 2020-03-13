@@ -44,7 +44,7 @@ function createDiagnostic(doc, pkg) {
 
   let message = getMessage(pkg);
 
-  if (!isAuthed) {
+  if (!isAuthed()) {
     message += '\nConnect your project to Snyk to find and fix vulnerabilities';
   }
 

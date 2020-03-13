@@ -3,6 +3,20 @@ import { isAuthed } from './getImports/snykAPI';
 // import { getPackageFromCache } from './getImports/packageInfo';
 import { KEY_MENTION, getPackageFromMessage } from './diagnostics';
 
+function createAuthAction({ isPreferred = true, diagnostic, actionTitle }) {
+  const action = new vscode.CodeAction(
+    actionTitle,
+    vscode.CodeActionKind.QuickFix
+  );
+
+  action.command = {
+    command: 'vulnCost.signIn',
+  };
+  action.diagnostics = [diagnostic];
+  action.isPreferred = isPreferred;
+  return action;
+}
+
 function createOpenBrowserAction({
   actionTitle,
   title,
@@ -82,15 +96,12 @@ export class SnykVulnInfo {
         //   );
         // }
 
-        if (!isAuthed) {
+        if (!isAuthed()) {
           res.push(
-            createOpenBrowserAction({
+            createAuthAction({
               diagnostic,
-              actionTitle:
-                'Connect your project to Snyk to fix vulnerabilities',
+              actionTitle: 'Connect Snyk to fix vulnerabilities',
               title: 'Connect to Snyk',
-              url:
-                'https://app.snyk.io/login?utm_source=vuln_cost&utm_campaign=vuln_cost',
               isPreferred: true,
             })
           );

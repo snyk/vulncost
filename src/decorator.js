@@ -1,11 +1,11 @@
 import { workspace, window, Range, Position, ThemeColor } from 'vscode';
 
-import logger from './logger';
+// import logger from './logger';
 
 const decorations = {};
 
 export function flushDecorations(fileName, packages) {
-  logger.log(`Flushing decorations`);
+  // logger.log(`Flushing decorations`);
   decorations[fileName] = {};
   packages.forEach(packageInfo => {
     if (packageInfo.vulns === undefined) {
@@ -30,16 +30,21 @@ function getDecorationMessage(packageInfo) {
     return '';
   }
 
-  let decorationMessage = packageInfo.vulns.count + ' vulns';
+  console.log(packageInfo.vulns)
+  console.log(typeof packageInfo.vulns)
+  console.log(JSON.stringify(packageInfo.vulns))
+
+  const { count } = packageInfo.vulns;
+  let decorationMessage = `${count} vuln${count === 1 ? '' : 's'}`;
 
   return decorationMessage;
 }
 
 function decorate(text, packageInfo) {
   const { fileName, line } = packageInfo;
-  logger.log(
-    `Setting Decoration: ${text}, ${JSON.stringify(packageInfo.name, null, 2)}`
-  );
+  // logger.log(
+  //   `Setting Decoration: ${text}, ${JSON.stringify(packageInfo.name, null, 2)}`
+  // );
 
   const hasVuln = text.includes('vuln');
 

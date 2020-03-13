@@ -5,15 +5,21 @@ const debug = true;
 class Logger {
   init(context) {
     this.context = context;
+    this.channel = window.createOutputChannel('Snyk vulnCost');
+    context.subscriptions.push(this.channel);
     if (debug) {
-      this.channel = window.createOutputChannel('vulnCost');
-      context.subscriptions.push(this.channel);
+      this.debugChannel = window.createOutputChannel('vulnCost-debug');
+      context.subscriptions.push(this.debugChannel);
     }
+  }
+
+  print(text) {
+    this.channel.appendLine(text);
   }
 
   log(text) {
     if (debug) {
-      this.channel.appendLine(text);
+      this.debugChannel.appendLine(text);
     }
   }
 }

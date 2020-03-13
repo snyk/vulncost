@@ -1,8 +1,10 @@
 import { dirname, join } from 'path';
 import finder from 'find-package-json';
 import test from './testVuln';
+import logger from '../logger';
 
 import { DebounceError, debouncePromise } from './debouncePromise';
+import report from '../report';
 
 let cache = {};
 let vulnCache = {};
@@ -61,7 +63,12 @@ export async function getPackageInfo(pkg) {
     try {
       vulnCache[key] = vulnCache[key] || lookupVulns(key, cache[pkg.string]);
       vulnCache[key] = await vulnCache[key];
+      console.log('vuln test complete for ' + key);
+      console.log(vulnCache[key]);
+      const reportSummary = report(key, vulnCache[key]);
+      if (!vulnCache[key].ok) logger.print(reportSummary);
     } catch (e) {
+      logger.log(`try on vuln test failed: ${e.message}`);
       if (e === DebounceError) {
         delete vulnCache[key];
         throw e;
@@ -79,5 +86,5 @@ export default function lookupVulns(key, pkg) {
     test(pkg)
       .then(resolve)
       .catch(reject);
-  });
+  }, 2000);
 }
