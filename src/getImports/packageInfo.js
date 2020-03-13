@@ -82,9 +82,13 @@ export async function getPackageInfo(pkg) {
 }
 
 export default function lookupVulns(key, pkg) {
-  return debouncePromise(key, (resolve, reject) => {
-    test(pkg)
-      .then(resolve)
-      .catch(reject);
-  }, 2000);
+  return debouncePromise(
+    key,
+    (resolve, reject) => {
+      test(pkg)
+        .then(resolve)
+        .catch(reject);
+    },
+    2000
+  );
 }
