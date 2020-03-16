@@ -33,6 +33,23 @@ export function getPackageFromMessage(message) {
   return message.replace(/^⛔\s+/g, '').split(' ')[0]
 }
 
+function breakdown(pkg) {
+  const sort = ['high', 'medium', 'low'];
+  const sortBy = (a, b) => {
+    return sort.indexOf(a.severity) - sort.indexOf(b.severity);
+  };
+
+  const vulns = pkg.vulns.vulnerabilities.sort(sortBy);
+  const high = vulns.filter(vuln => vuln.severity === "high").length;
+  const medium = vulns.filter(vuln => vuln.severity === "medium").length;
+  const low = vulns.filter(vuln => vuln.severity === "low").length;
+
+  const message = `${high} High, ${medium} Medium, ${low} Low`;
+  const breakdown = `\n ${vulns.map(vuln => `${vuln.severity.toUpperCase()} ${vuln.packageName}@${vuln.version} ${vuln.title}`).join('\n ')}`;
+
+  return message + breakdown;
+}
+
 function createDiagnostic(doc, pkg) {
   // create range that represents, where in the document the word is
   let range = new vscode.Range(
@@ -46,6 +63,8 @@ function createDiagnostic(doc, pkg) {
 
   if (!isAuthed()) {
     message += '\nConnect your project to Snyk to find and fix vulnerabilities';
+  } else {
+    message += ` - ${breakdown(pkg)}`;
   }
 
   let diagnostic = new vscode.Diagnostic(
