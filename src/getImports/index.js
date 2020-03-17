@@ -29,6 +29,10 @@ export function getImports(fileName, text, language) {
           return false;
         }
 
+        if (info.name.startsWith('~')) {
+          return false;
+        }
+
         if (info.name.trim() == '') {
           return false;
         }

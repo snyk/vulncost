@@ -26,13 +26,9 @@ export function calculated(packageInfo) {
 }
 
 function getDecorationMessage(packageInfo) {
-  if (!packageInfo.vulns || packageInfo.vulns.count <= 0) {
+  if (!packageInfo.vulns || !packageInfo.vulns.count) {
     return '';
   }
-
-  console.log(packageInfo.vulns)
-  console.log(typeof packageInfo.vulns)
-  console.log(JSON.stringify(packageInfo.vulns))
 
   const { count } = packageInfo.vulns;
   let decorationMessage = `${count} vuln${count === 1 ? '' : 's'}`;

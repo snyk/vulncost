@@ -11,7 +11,7 @@ function testNoAuth(key) {
       if (typeof data === 'string') {
         // bug on snyk's side, returning a string for 404
         logger.log('bad return on ' + key);
-        return null;
+        throw new Error('bad return from snyk api (unauthed)');
       }
 
       return {
@@ -49,6 +49,10 @@ function testWithAuth(pkg) {
           return false;
         }, false),
       };
+    })
+    .catch(e => {
+      logger.log(`${url} failed with ${e.message}`);
+      throw e;
     });
 }
 
