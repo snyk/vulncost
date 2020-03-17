@@ -12,6 +12,7 @@ import { isAuthed, setToken } from './getImports/snykAPI';
 import { refreshDiagnostics } from './diagnostics';
 import { v4 as uuidv4 } from 'uuid';
 import authenticate from './authenticate';
+import utm from './utm';
 
 const { window, workspace, commands } = vscode;
 
@@ -92,9 +93,7 @@ export function activate(context) {
         }
 
         const token = uuidv4();
-        const url =
-          'https://app.snyk.io/login?utm_medium=ide&utm_source=vscode&utm_campaign=vuln_cost&token=' +
-          token;
+        const url = `https://app.snyk.io/login?${utm}&token=${token}`;
 
         vscode.env.openExternal(vscode.Uri.parse(url)).then(() => {
           authenticate(token)

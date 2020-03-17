@@ -1,12 +1,13 @@
 import snykAPI, { isAuthed } from './snykAPI';
 import axios from 'axios';
 import logger from '../logger';
+import utm from '../utm';
 
 const API_ROOT = 'https://snyk.io/api/v1/vuln/npm/';
 
 function testNoAuth(key) {
   return axios
-    .get(`https://snyk.io/test/npm/${key}?type=json`)
+    .get(`https://snyk.io/test/npm/${key}?${utm}&type=json`)
     .then(({ data }) => {
       if (typeof data === 'string') {
         // bug on snyk's side, returning a string for 404
@@ -25,7 +26,7 @@ function testNoAuth(key) {
 function testWithAuth(pkg) {
   const encodedName = encodeURIComponent(pkg.name + '@' + pkg.version);
   // options.vulnEndpoint is only used by `snyk protect` (i.e. local filesystem tests)
-  const url = API_ROOT + encodedName;
+  const url = API_ROOT + encodedName + '?' + utm;
   return axios
     .get(url, {
       headers: {
@@ -36,7 +37,7 @@ function testWithAuth(pkg) {
     .then(res => {
       const packageName = decodeURIComponent(
         res.request.res.responseUrl.replace(API_ROOT, '')
-      );
+      ).replace(/\?.*$/, '');
 
       const vulns = res.data.vulnerabilities || [];
       return {

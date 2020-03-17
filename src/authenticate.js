@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { AuthFailedError, TokenExpiredError } from './errors';
+import utm from './utm';
 
 const API = 'https://snyk.io/api';
 let attemptsLeft = 0;
@@ -14,14 +15,11 @@ export default function authenticate(token) {
 }
 
 function testAuthComplete(token) {
-  console.log('call testAuthComplete')
   return axios
-    .post(API + '/verify/callback', {
+    .post(API + '/verify/callback?' + utm, {
       token,
     })
     .then(({ status, data }) => {
-      console.log(status);
-      console.log(data);
       return new Promise((resolve, reject) => {
         if (status !== 200) {
           return reject(AuthFailedError(data.message, status));

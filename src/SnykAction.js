@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import { isAuthed } from './getImports/snykAPI';
-// import { getPackageFromCache } from './getImports/packageInfo';
+import utm from './utm';
 import { KEY_MENTION, getPackageFromMessage } from './diagnostics';
 
 function createAuthAction({ isPreferred = true, diagnostic, actionTitle }) {
@@ -80,7 +80,7 @@ export class SnykVulnInfo {
         const res = [
           createOpenBrowserAction({
             diagnostic,
-            url: 'https://snyk.io/test/npm/' + pkg,
+            url: `https://snyk.io/test/npm/${pkg}?${utm}`,
             actionTitle: 'Learn about this vulnerability',
             title: 'Learn about this vulnerability',
           }),
