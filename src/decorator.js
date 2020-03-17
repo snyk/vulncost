@@ -1,6 +1,5 @@
 import { workspace, window, Range, Position, ThemeColor } from 'vscode';
-
-// import logger from './logger';
+import logger from './logger';
 
 const decorations = {};
 
@@ -10,7 +9,7 @@ export function flushDecorations(fileName, packages) {
   packages.forEach(packageInfo => {
     if (packageInfo.vulns === undefined) {
       const configuration = workspace.getConfiguration('vulnCost');
-      if (configuration.showCalculatingDecoration) {
+      if (configuration.showDecoration) {
         decorate('Scanning for vulns...', packageInfo);
       }
     } else {
@@ -26,6 +25,11 @@ export function calculated(packageInfo) {
 }
 
 function getDecorationMessage(packageInfo) {
+  logger.log(
+    `getDecorationMessage - has object? ${!!packageInfo}, has prop? ${!!packageInfo.vulns}, for ${
+      packageInfo.name
+    }`
+  );
   if (!packageInfo.vulns || !packageInfo.vulns.count) {
     return '';
   }

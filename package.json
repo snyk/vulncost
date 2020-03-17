@@ -3,7 +3,7 @@
   "displayName": "Vulnerability Cost",
   "description": "Display imported vulnerabilities in VS Code",
   "license": "MIT",
-  "version": "1.0.0-alpha.3",
+  "version": "1.0.0-alpha.4",
   "publisher": "snyk",
   "scripts": {
     "DISABLED_postinstall": "node ./node_modules/vscode/bin/install",
@@ -24,7 +24,8 @@
     "onLanguage:javascript",
     "onLanguage:javascriptreact",
     "onLanguage:typescript",
-    "onLanguage:typescriptreact"
+    "onLanguage:typescriptreact",
+    "onLanguage:html"
   ],
   "keywords": [
     "import",
@@ -53,17 +54,17 @@
           ],
           "description": "File extensions to be parsed by the JavaScript parser"
         },
-        "vulnCost.javascriptExtensions": {
+        "vulnCost.htmlExtensions": {
           "type": "array",
           "default": [
             "\\.html?$"
           ],
           "description": "File extensions to be parsed by the HTML parser"
         },
-        "vulnCost.showCalculatingDecoration": {
+        "vulnCost.showDecoration": {
           "type": "boolean",
           "default": true,
-          "description": "Display the 'calculating' decoration when starting to check vulnerability"
+          "description": "Display the decoration when starting to check vulnerability"
         },
         "vulnCost.debug": {
           "type": "boolean",

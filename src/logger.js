@@ -23,6 +23,7 @@ class Logger {
 
   log(text) {
     if (debug) {
+      console.log(text);
       this.debugChannel.appendLine(text);
     }
   }

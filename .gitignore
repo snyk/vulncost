@@ -5,3 +5,4 @@ dist/
 !test/fixtures/yarn-workspace/node_modules
 .cache/
 tmp/
+*.vsix

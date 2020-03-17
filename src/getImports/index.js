@@ -2,7 +2,9 @@ import {
   getPackages,
   TYPESCRIPT as TYPESCRIPT_LANG,
   JAVASCRIPT as JAVASCRIPT_LANG,
+  HTML as HTML_LANG,
 } from './parser';
+import nativePackages from './native';
 import {
   getPackageInfo,
   clearPackageCache as _clearPackageCache,
@@ -13,6 +15,7 @@ import validate from 'validate-npm-package-name';
 
 export const TYPESCRIPT = TYPESCRIPT_LANG;
 export const JAVASCRIPT = JAVASCRIPT_LANG;
+export const HTML = HTML_LANG;
 export const clearPackageCache = _clearPackageCache; // this is weird…
 
 export function getImports(fileName, text, language) {
@@ -25,6 +28,10 @@ export function getImports(fileName, text, language) {
     }
     try {
       const imports = getPackages(fileName, text, language).filter(info => {
+        if (nativePackages.includes(info.name.toLowerCase())) {
+          return false;
+        }
+
         if (info.name.startsWith('.')) {
           return false;
         }
@@ -63,6 +70,7 @@ export function getImports(fileName, text, language) {
       const packages = await Promise.all(promises);
       emitter.emit('done', packages);
     } catch (e) {
+      console.log(e);
       emitter.emit('error', e);
     }
   }, 0);

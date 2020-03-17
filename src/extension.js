@@ -3,6 +3,7 @@ import {
   getImports,
   JAVASCRIPT,
   TYPESCRIPT,
+  HTML,
 } from './getImports';
 import * as vscode from 'vscode';
 import { calculated, flushDecorations, clearDecorations } from './decorator';
@@ -29,25 +30,17 @@ export function activate(context) {
       logger.log('🔓 Using anonymous API');
     }
 
-    context.subscriptions.push(
-      vscode.languages.registerCodeActionsProvider(
-        JAVASCRIPT,
-        new SnykVulnInfo(),
-        {
-          providedCodeActionKinds: SnykVulnInfo.providedCodeActionKinds,
-        }
-      )
-    );
-
-    context.subscriptions.push(
-      vscode.languages.registerCodeActionsProvider(
-        TYPESCRIPT,
-        new SnykVulnInfo(),
-        {
-          providedCodeActionKinds: SnykVulnInfo.providedCodeActionKinds,
-        }
-      )
-    );
+    [JAVASCRIPT, TYPESCRIPT, HTML].forEach(language => {
+      context.subscriptions.push(
+        vscode.languages.registerCodeActionsProvider(
+          language,
+          new SnykVulnInfo(),
+          {
+            providedCodeActionKinds: SnykVulnInfo.providedCodeActionKinds,
+          }
+        )
+      );
+    });
 
     const diagnostics = vscode.languages.createDiagnosticCollection(
       'snyk-vulns'
@@ -84,9 +77,7 @@ export function activate(context) {
     );
 
     context.subscriptions.push(
-      commands.registerCommand('vulnCost.showOutput', () => {
-        logger.show();
-      })
+      commands.registerCommand('vulnCost.showOutput', () => logger.show())
     );
 
     context.subscriptions.push(
@@ -116,7 +107,7 @@ export function activate(context) {
               }
             })
             .catch(e => {
-              logger.log(e.message);
+              logger.log(e.stack);
               window.showErrorMessage(e.message);
             });
         });
@@ -155,7 +146,7 @@ async function processActiveFile(document, diagnostics) {
     if (emitters[fileName]) {
       emitters[fileName].removeAllListeners();
     }
-    // const { timeout } = workspace.getConfiguration('vulnCost');
+
     emitters[fileName] = getImports(
       fileName,
       document.getText(),
@@ -163,7 +154,9 @@ async function processActiveFile(document, diagnostics) {
     );
 
     emitters[fileName].on('package', createPackageWatcher);
-    emitters[fileName].on('error', e => logger.log(`vulnCost error: ${e}`));
+    emitters[fileName].on('error', e =>
+      logger.log(`vulnCost error: ${e.stack}`)
+    );
     emitters[fileName].on('start', packages => {
       flushDecorations(fileName, packages);
     });
@@ -184,19 +177,26 @@ function language({ fileName, languageId }) {
   const javascriptRegex = new RegExp(
     configuration.javascriptExtensions.join('|')
   );
+  const htmlRegex = new RegExp(configuration.htmlExtensions.join('|'));
   if (
     languageId === 'typescript' ||
     languageId === 'typescriptreact' ||
     typescriptRegex.test(fileName)
   ) {
     return TYPESCRIPT;
-  } else if (
+  }
+
+  if (
     languageId === 'javascript' ||
     languageId === 'javascriptreact' ||
     javascriptRegex.test(fileName)
   ) {
     return JAVASCRIPT;
-  } else {
-    return undefined;
   }
+
+  if (languageId === 'html' || htmlRegex.test(fileName)) {
+    return HTML;
+  }
+
+  return undefined;
 }

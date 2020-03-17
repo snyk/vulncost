@@ -58,6 +58,7 @@ function testWithAuth(pkg) {
 }
 
 export default function test(pkg) {
+  logger.log(`testing ${pkg.name}@${pkg.version}`);
   if (isAuthed()) {
     return testWithAuth(pkg);
   } else {

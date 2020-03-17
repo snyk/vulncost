@@ -11,6 +11,10 @@ let vulnCache = {};
 const projectCache = {};
 
 export function getPackageKey(pkg) {
+  if (pkg.version && pkg.name) {
+    return { name: pkg.name, version: pkg.version };
+  }
+
   let dir = projectCache[pkg.fileName];
 
   if (!dir) {
@@ -52,19 +56,24 @@ export function getPackageFromCache(key) {
 
 export async function getPackageInfo(pkg) {
   try {
-    cache[pkg.string] = cache[pkg.string] || getPackageKey(pkg);
+    if (pkg.string) {
+      cache[pkg.string] = cache[pkg.string] || getPackageKey(pkg);
+    } else {
+      cache[pkg.string] = getPackageKey(pkg);
+    }
   } catch (e) {
+    logger.log(e.message);
     return pkg;
   }
 
   const key = keyed(cache[pkg.string]);
+  logger.log('query ' + key);
 
   if (vulnCache[key] === undefined || vulnCache[key] instanceof Promise) {
     try {
       vulnCache[key] = vulnCache[key] || lookupVulns(key, cache[pkg.string]);
       vulnCache[key] = await vulnCache[key];
-      console.log('vuln test complete for ' + key);
-      console.log(vulnCache[key]);
+      logger.log('vuln test complete for ' + key);
       const reportSummary = report(key, vulnCache[key]);
       if (!vulnCache[key].ok) logger.print(reportSummary);
     } catch (e) {
