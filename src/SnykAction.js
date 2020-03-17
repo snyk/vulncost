@@ -3,18 +3,31 @@ import { isAuthed } from './getImports/snykAPI';
 import utm from './utm';
 import { KEY_MENTION, getPackageFromMessage } from './diagnostics';
 
-function createAuthAction({ isPreferred = true, diagnostic, actionTitle }) {
+function createSimpleAction({
+  isPreferred = true,
+  diagnostic,
+  actionTitle,
+  command,
+}) {
   const action = new vscode.CodeAction(
     actionTitle,
     vscode.CodeActionKind.QuickFix
   );
 
   action.command = {
-    command: 'vulnCost.signIn',
+    command,
   };
   action.diagnostics = [diagnostic];
   action.isPreferred = isPreferred;
   return action;
+}
+
+function createAuthAction(args) {
+  return createSimpleAction({ command: 'vulnCost.signIn', ...args });
+}
+
+function createShowOutputAction(args) {
+  return createSimpleAction({ command: 'vulnCost.showOutput', ...args });
 }
 
 function createOpenBrowserAction({
@@ -77,14 +90,27 @@ export class SnykVulnInfo {
         const pkg = getPackageFromMessage(diagnostic.message);
         // const vulns = getPackageFromCache(pkg);
 
-        const res = [
+        const res = [];
+
+        if (isAuthed()) {
+          res.push(
+            createShowOutputAction({
+              diagnostic,
+              actionTitle: 'Show vulnerability details',
+              title: 'Show vulnerability details',
+              isPreferred: true,
+            })
+          );
+        }
+
+        res.push(
           createOpenBrowserAction({
             diagnostic,
             url: `https://snyk.io/test/npm/${pkg}?${utm}`,
             actionTitle: 'Learn about this vulnerability',
             title: 'Learn about this vulnerability',
-          }),
-        ];
+          })
+        );
 
         // if (vulns.fixable && isAuthed) {
         //   res.push(

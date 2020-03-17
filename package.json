@@ -44,14 +44,21 @@
           "default": [
             "\\.tsx?$"
           ],
-          "description": "File extensions to be parsed by the Typescript parser"
+          "description": "File extensions to be parsed by the TypeScript parser"
         },
         "vulnCost.javascriptExtensions": {
           "type": "array",
           "default": [
             "\\.jsx?$"
           ],
-          "description": "File extensions to be parsed by the Javascript parser"
+          "description": "File extensions to be parsed by the JavaScript parser"
+        },
+        "vulnCost.javascriptExtensions": {
+          "type": "array",
+          "default": [
+            "\\.html?$"
+          ],
+          "description": "File extensions to be parsed by the HTML parser"
         },
         "vulnCost.showCalculatingDecoration": {
           "type": "boolean",
@@ -73,11 +80,15 @@
     "commands": [
       {
         "command": "vulnCost.toggle",
-        "title": "Toggle vuln cost"
+        "title": "Snyk: Toggle vuln cost"
       },
       {
         "command": "vulnCost.signIn",
-        "title": "Signup/create a Snyk account"
+        "title": "Snyk: Signup/create a Snyk account"
+      },
+      {
+        "command": "vulnCost.showOutput",
+        "title": "Snyk: Show vulnerability report"
       }
     ]
   },
@@ -92,6 +103,7 @@
     "@snyk/configstore": "^3.2.0-rc1",
     "axios": "^0.19.2",
     "find-package-json": "^1.2.0",
+    "htmlparser2": "^4.1.0",
     "snyk": "^1.297.3",
     "uuid": "^7.0.2",
     "validate-npm-package-name": "^3.0.0"

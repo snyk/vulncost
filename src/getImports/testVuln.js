@@ -1,4 +1,4 @@
-import snykAPI, { isAuthed } from './snykAPI';
+import { isAuthed, getToken } from './snykAPI';
 import axios from 'axios';
 import logger from '../logger';
 import utm from '../utm';
@@ -31,7 +31,7 @@ function testWithAuth(pkg) {
     .get(url, {
       headers: {
         'x-is-ci': false,
-        authorization: 'token ' + snykAPI,
+        authorization: 'token ' + getToken(),
       },
     })
     .then(res => {

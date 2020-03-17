@@ -84,6 +84,12 @@ export function activate(context) {
     );
 
     context.subscriptions.push(
+      commands.registerCommand('vulnCost.showOutput', () => {
+        logger.show();
+      })
+    );
+
+    context.subscriptions.push(
       commands.registerCommand('vulnCost.signIn', () => {
         if (isAuthed()) {
           window.showInformationMessage(
@@ -102,6 +108,12 @@ export function activate(context) {
               window.showInformationMessage(
                 'Your Snyk account is now connected.'
               );
+
+              // and and reset vulns after auth
+              clearPackageCache();
+              if (isActive && window.activeTextEditor) {
+                commands.executeCommand('vulnCost.check');
+              }
             })
             .catch(e => {
               logger.log(e.message);

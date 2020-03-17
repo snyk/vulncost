@@ -11,7 +11,7 @@ export function flushDecorations(fileName, packages) {
     if (packageInfo.vulns === undefined) {
       const configuration = workspace.getConfiguration('vulnCost');
       if (configuration.showCalculatingDecoration) {
-        decorate('Checking...', packageInfo);
+        decorate('Scanning for vulns...', packageInfo);
       }
     } else {
       calculated(packageInfo);
@@ -38,17 +38,12 @@ function getDecorationMessage(packageInfo) {
 
 function decorate(text, packageInfo) {
   const { fileName, line } = packageInfo;
-  // logger.log(
-  //   `Setting Decoration: ${text}, ${JSON.stringify(packageInfo.name, null, 2)}`
-  // );
 
   const hasVuln = text.includes('vuln');
 
-  let color = new ThemeColor(
-    hasVuln ? 'errorForeground' : 'foreground'
-  );
+  let color = new ThemeColor(hasVuln ? 'errorForeground' : 'foreground');
 
-  let fontWeight = hasVuln ?  "bold" : "normal";
+  let fontWeight = hasVuln ? 'bold' : 'normal';
 
   decorations[fileName][line] = {
     renderOptions: { after: { contentText: text, color, fontWeight } },

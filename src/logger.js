@@ -13,6 +13,10 @@ class Logger {
     }
   }
 
+  show() {
+    this.channel.show();
+  }
+
   print(text) {
     this.channel.appendLine(text);
   }

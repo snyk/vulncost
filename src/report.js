@@ -4,6 +4,22 @@ const sortBy = (a, b) => {
 };
 const ucFirst = _ => `${_[0].toUpperCase()}${_.slice(1)}`;
 
+export const summary = pkg => {
+  const message = pkg.vulns.vulnerabilities
+    .reduce(
+      (acc, curr) => {
+        acc[sort.indexOf(curr.severity)]++;
+        return acc;
+      },
+      [0, 0, 0] // relies on the order of high, medium, low (based on `sort`)
+    )
+    .map((_, i) => `${_} ${sort[i]}`) // remaps to include the severit type
+    .filter(_ => _[0] !== '0') // drop those starting with zero
+    .join(', ');
+
+  return message;
+};
+
 /**
  *
  * @param {string} tested Tested module in format package@version
@@ -16,8 +32,8 @@ export default function report(tested, data) {
     return '';
   }
 
-  const res = data.vulnerabilities.map(
-    ({ severity, upgradePath, title, from, id }) => {
+  const res = data.vulnerabilities
+    .map(({ severity, upgradePath, title, from, id }) => {
       return {
         id,
         severity,
@@ -27,13 +43,13 @@ export default function report(tested, data) {
         from: from.pop(),
         direct: upgradePath.length === 1,
       };
-    }
-  ).filter(({ id }) => {
-    if (!dedupe.includes(id)) {
-      dedupe.push(id);
-      return true;
-    }
-  });
+    })
+    .filter(({ id }) => {
+      if (!dedupe.includes(id)) {
+        dedupe.push(id);
+        return true;
+      }
+    });
 
   const direct = res
     .filter(_ => _.direct)
@@ -48,10 +64,16 @@ export default function report(tested, data) {
 
   const lines = ['', `=== ${tested} ===`, ''];
 
+  // NOTE: agreed that UTM doesn't go on visable links (in the output panel)
   if (direct.length) {
     lines.push(
       'Direct:',
-      direct.map(_ => `${ucFirst(_.severity)} ${_.title}\n- https://snyk.io/vuln/${_.id}`).join('\n'),
+      direct
+        .map(
+          _ =>
+            `${ucFirst(_.severity)} ${_.title}\n- https://snyk.io/vuln/${_.id}`
+        )
+        .join('\n'),
       ''
     );
   }
@@ -60,7 +82,12 @@ export default function report(tested, data) {
     lines.push(
       'Indirect:',
       indirect
-        .map(_ => `${ucFirst(_.severity)} ${_.title} in ${_.from}\n- https://snyk.io/vuln/${_.id}`)
+        .map(
+          _ =>
+            `${ucFirst(_.severity)} ${_.title} in ${
+              _.from
+            }\n- https://snyk.io/vuln/${_.id}`
+        )
         .join('\n'),
       ''
     );

@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 import { isAuthed } from './getImports/snykAPI';
+import { summary } from './report';
 
 export const KEY_MENTION = 'snyk_vulns';
 
@@ -30,7 +31,7 @@ export function getMessage(pkg) {
 }
 
 export function getPackageFromMessage(message) {
-  return message.replace(/^⛔\s+/g, '').split(' ')[0]
+  return message.replace(/^⛔\s+/g, '').split(' ')[0];
 }
 
 function createDiagnostic(doc, pkg) {
@@ -46,6 +47,8 @@ function createDiagnostic(doc, pkg) {
 
   if (!isAuthed()) {
     message += '\nConnect your project to Snyk to find and fix vulnerabilities';
+  } else {
+    message = message.replace(/\b\d+ vulns$/, summary(pkg) + ' vulns');
   }
 
   let diagnostic = new vscode.Diagnostic(

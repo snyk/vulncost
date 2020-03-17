@@ -10,4 +10,6 @@ export const setToken = t => {
   token = t;
 };
 
+export const getToken = () => token;
+
 export default token;
