@@ -1,13 +1,16 @@
 # Vulnerability cost for Snyk
 
-## Building vsix
+## Release directions
 
-Directions on [Visual Studio site](https://code.visualstudio.com/api/working-with-extensions/publishing-extension), but in short:
+Full installation directions are on [Visual Studio site](https://code.visualstudio.com/api/working-with-extensions/publishing-extension), but in short:
 
 - `npm install -g vsce`
-- `vsce package`
+- `vsce package` - this will generate a sharable .vsix file
+- `vsce publish <type>` - publishes to `<publisherID>.extension` on VS Code MarketPlace
 
-This will run npm scripts: `check` (eslint + prettier) and `webpack` (dist files) if either fail, `vsce` doesn't report what failed so you will need to re-run these checks manually. Otherwise it will generate a (zip) `.vsix` file that can be manually installed using `code --install-extension vscode-vuln-cost-1.0.0.vsix`
+The `vsce package` will also run npm scripts before compiling the .vsix file: `check` (eslint + prettier) and `webpack` (dist files) if either fail, `vsce` doesn't report what failed so you will need to re-run these checks manually. Otherwise it will generate a (zip) `.vsix` file that can be manually installed using `code --install-extension vscode-vuln-cost-1.0.0.vsix`
+
+To release, ensure the correct type is used in the `vsce publish` - see [Auto-incrementing the extension version](https://code.visualstudio.com/api/working-with-extensions/publishing-extension#autoincrementing-the-extension-version) for details.
 
 ## Developing
 
