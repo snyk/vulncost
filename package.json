@@ -3,7 +3,7 @@
   "displayName": "Vulnerability Cost",
   "description": "Display imported vulnerabilities in VS Code",
   "license": "MIT",
-  "version": "1.0.0-alpha.5",
+  "version": "1.0.0",
   "publisher": "snyk",
   "scripts": {
     "DISABLED_postinstall": "node ./node_modules/vscode/bin/install",
