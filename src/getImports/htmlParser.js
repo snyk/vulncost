@@ -4,13 +4,14 @@ const htmlparser2 = require('htmlparser2');
 const JQUERY = 'https://code.jquery.com/';
 const MAXCDN = 'https://maxcdn.bootstrapcdn.com/';
 const YANDEX = 'https://yastatic.net/';
-const pathBased = [MAXCDN, YANDEX];
+const BOOTSTRAP = 'https://stackpath.bootstrapcdn.com/';
+const pathBased = [MAXCDN, YANDEX, BOOTSTRAP];
 
 const JSDELIVR = 'https://cdn.jsdelivr.net/npm/';
 const UNPKG = 'https://unpkg.com/';
 const atBased = [JSDELIVR, UNPKG];
 
-// packageFromUrl('https://code.jquery.com/jquery-3.0.0-rc1.js') // ?
+// packageFromUrl('https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js') // ?
 
 function packageFromUrl(url) {
   let i = url.toLowerCase().indexOf('/ajax/libs/');
