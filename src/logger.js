@@ -17,6 +17,16 @@ class Logger {
     this.channel.show();
   }
 
+  clear() {
+    this.channel.clear();
+  }
+
+  flushWith(text) {
+    this.clear();
+    this.print(text);
+    this.show();
+  }
+
   print(text) {
     this.channel.appendLine(text);
   }

@@ -80,6 +80,10 @@
     },
     "commands": [
       {
+        "command": "vulnCost.check",
+        "title": "Snyk: run vulnerability test"
+      },
+      {
         "command": "vulnCost.toggle",
         "title": "Snyk: Toggle vuln cost"
       },

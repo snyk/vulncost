@@ -75,6 +75,7 @@ export async function getPackageInfo(pkg) {
       vulnCache[key] = await vulnCache[key];
       logger.log('vuln test complete for ' + key);
       const reportSummary = report(key, vulnCache[key]);
+      vulnCache[key].reportSummary = reportSummary;
       if (!vulnCache[key].ok) logger.print(reportSummary);
     } catch (e) {
       logger.log(`try on vuln test failed: ${e.message}`);

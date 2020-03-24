@@ -60,6 +60,7 @@ export function activate(context) {
 
     context.subscriptions.push(
       commands.registerCommand('vulnCost.check', () => {
+        clearPackageCache();
         processActiveFile(window.activeTextEditor.document, diagnostics);
       })
     );
@@ -77,7 +78,13 @@ export function activate(context) {
     );
 
     context.subscriptions.push(
-      commands.registerCommand('vulnCost.showOutput', () => logger.show())
+      commands.registerCommand('vulnCost.showOutput', vuln => {
+        if (!vuln) {
+          return logger.show();
+        }
+
+        logger.flushWith(vuln.reportSummary.trim());
+      })
     );
 
     context.subscriptions.push(
@@ -101,7 +108,6 @@ export function activate(context) {
               );
 
               // and and reset vulns after auth
-              clearPackageCache();
               if (isActive && window.activeTextEditor) {
                 commands.executeCommand('vulnCost.check');
               }
@@ -130,6 +136,9 @@ function createPackageWatcher(fileName) {
   // FIXME investigate why this doesn't work in a multi-root workspace (might be a vscode bug)
   const watcher = vscode.workspace.createFileSystemWatcher(fileName);
   watcher.onDidChange(() => {
+    logger.log(
+      'package.json change detected, clear vuln cache and if file active, running checks again'
+    );
     clearPackageCache();
     if (isActive && window.activeTextEditor) {
       commands.executeCommand('vulnCost.check');
