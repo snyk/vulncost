@@ -1,6 +1,6 @@
 {
   "name": "vscode-vuln-cost",
-  "displayName": "Vulnerability Cost",
+  "displayName": "Vuln Cost",
   "description": "Display imported vulnerabilities in VS Code",
   "license": "MIT",
   "version": "1.0.0",
