@@ -1,5 +1,7 @@
 # Vuln Cost - Security Scanner for VS Code
 
+![Known Vulnerabilities](https://snyk.io/test/github/snyk/vulncost/badge.svg)
+
 ## Vulnerability scanning in VS Code
 
 Find security vulnerabilities in open source npm packages while you code.
