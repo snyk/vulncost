@@ -6,7 +6,7 @@ import {
   HTML,
 } from './getImports';
 import * as vscode from 'vscode';
-import { calculated, flushDecorations, clearDecorations } from './decorator';
+import { calculated, flushDecorations, clearDecorations, clearShown} from './decorator';
 import logger from './logger';
 import { SnykVulnInfo } from './SnykAction';
 import { isAuthed, setToken } from './getImports/snykAPI';
@@ -61,6 +61,7 @@ export function activate(context) {
     context.subscriptions.push(
       commands.registerCommand('vulnCost.check', () => {
         clearPackageCache();
+        clearShown();
         processActiveFile(window.activeTextEditor.document, diagnostics);
       })
     );
@@ -140,6 +141,7 @@ function createPackageWatcher(fileName) {
       'package.json change detected, clear vuln cache and if file active, running checks again'
     );
     clearPackageCache();
+    clearShown();
     if (isActive && window.activeTextEditor) {
       commands.executeCommand('vulnCost.check');
     }
@@ -169,10 +171,10 @@ async function processActiveFile(document, diagnostics) {
     emitters[fileName].on('start', packages => {
       flushDecorations(fileName, packages);
     });
-    emitters[fileName].on('calculated', calculated);
+    emitters[fileName].on('calculated', packageInfo => {calculated(packageInfo);});
 
     emitters[fileName].on('done', packages => {
-      flushDecorations(fileName, packages);
+      flushDecorations(fileName, packages, true);
       refreshDiagnostics(document, diagnostics, packages);
     });
   }
