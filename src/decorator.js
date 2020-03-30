@@ -2,8 +2,9 @@ import { workspace, window, Range, Position, ThemeColor } from 'vscode';
 import logger from './logger';
 
 const decorations = {};
+const shown = {};
 
-export function flushDecorations(fileName, packages) {
+export function flushDecorations(fileName, packages, displayCheck = false) {
   // logger.log(`Flushing decorations`);
   decorations[fileName] = {};
   packages.forEach(packageInfo => {
@@ -13,16 +14,28 @@ export function flushDecorations(fileName, packages) {
         decorate('Scanning for vulns...', packageInfo);
       }
     } else {
-      calculated(packageInfo);
+      calculated(packageInfo, displayCheck);
     }
   });
   refreshDecorations(fileName);
 }
 
-export function calculated(packageInfo) {
+export function calculated(packageInfo, displayCheck = false) {
   const decorationMessage = getDecorationMessage(packageInfo);
-  decorate(decorationMessage, packageInfo);
+
+  if (displayCheck && decorationMessage.length === 0 && (shown[packageInfo.string+packageInfo.fileName] === undefined || !shown[packageInfo.string+packageInfo.fileName])) {
+    shown[packageInfo.string+packageInfo.fileName] = true;
+    decorate("✔️", packageInfo);
+    setTimeout(() => {decorate(decorationMessage, packageInfo);}, 1000);
+  } else {
+    decorate(decorationMessage, packageInfo);
+  }
 }
+
+export function clearShown() {
+  shown = {};
+}
+
 
 function getDecorationMessage(packageInfo) {
   logger.log(
