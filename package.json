@@ -127,12 +127,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/snyk/vulncost.git"
+    "url": "https://github.com/snyk/vulncost.git"
   },
   "bugs": {
     "url": "https://github.com/snyk/vulncost/issues"
   },
   "homepage": "https://github.com/snyk/vulncost#readme",
+  "icon": "images/vuln-cost-logo.png",
   "directories": {
     "test": "test"
   }
