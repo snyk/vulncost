@@ -2,7 +2,7 @@ import { workspace, window, Range, Position, ThemeColor } from 'vscode';
 import logger from './logger';
 
 const decorations = {};
-const shown = {};
+let shown = {};
 
 export function flushDecorations(fileName, packages, displayCheck = false) {
   // logger.log(`Flushing decorations`);
