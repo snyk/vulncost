@@ -2,6 +2,10 @@
 
 ![Known Vulnerabilities](https://snyk.io/test/github/snyk/vulncost/badge.svg)
 
+- [Homepage](https://snyk.io/security-scanner-vuln-cost/)
+- [Github repository](https://github.com/snyk/vulncost)
+- [Issues](https://github.com/snyk/vulncost/issues)
+
 ## Vulnerability scanning in VS Code
 
 Find security vulnerabilities in open source npm packages while you code.
@@ -30,3 +34,17 @@ Vuln Cost in JavaScript files:
 Vuln Cost in HTML files:
 
 ![Vuln Cost in HTML files](https://raw.githubusercontent.com/snyk/vulncost/master/images/unpkg.png)
+
+## CDN support
+Vuln Cost scans HTML files and displays vulnerability information about the JavaScript packages you download from multiple CDN providers.
+
+#### Currently supported CDN's
+- unpkg.com
+- ajax.googleapis.com
+- cdn.jsdelivr.net
+- cdnjs.cloudflare.com
+- code.jquery.com
+- maxcdn.bootstrapcdn.com
+
+
+
