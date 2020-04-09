@@ -25,7 +25,8 @@
     "onLanguage:javascriptreact",
     "onLanguage:typescript",
     "onLanguage:typescriptreact",
-    "onLanguage:html"
+    "onLanguage:html",
+    "onLanguage:json"
   ],
   "keywords": [
     "import",

@@ -3,6 +3,7 @@ import {
   TYPESCRIPT as TYPESCRIPT_LANG,
   JAVASCRIPT as JAVASCRIPT_LANG,
   HTML as HTML_LANG,
+  PJSON as PJSON_LANG,
 } from './parser';
 import nativePackages from './native';
 import {
@@ -16,6 +17,7 @@ import validate from 'validate-npm-package-name';
 export const TYPESCRIPT = TYPESCRIPT_LANG;
 export const JAVASCRIPT = JAVASCRIPT_LANG;
 export const HTML = HTML_LANG;
+export const PJSON = PJSON_LANG;
 export const clearPackageCache = _clearPackageCache; // this is weird…
 
 export function getImports(fileName, text, language) {
