@@ -2,6 +2,7 @@ import traverse from '@babel/traverse';
 import * as t from '@babel/types';
 import * as fs from 'fs';
 import * as path from 'path';
+import { workspace } from 'vscode';
 import { parse as jsParse } from '@babel/parser';
 import { TYPESCRIPT } from './parser';
 import logger from '../logger';
@@ -29,10 +30,27 @@ export function getPackages(fileName, source, language) {
   const packages = [];
   const visitor = {
     ImportDeclaration({ node }) {
+      const configuration = workspace.getConfiguration('vulnCost');
+      let pathIgnored = false;
+
+      for (let i = 0; i < configuration.ignorePaths.length; i++) {
+        const path = configuration.ignorePaths[i];
+        pathIgnored = new RegExp(path).test(node.source.value);
+
+        if (pathIgnored) {
+          continue;
+        }
+      }
+
+      if (pathIgnored) {
+        logger.log(`Import ${node.source.value} matched ignored path: ${path}`);
+        return;
+      }
+
       const target = path.dirname(fileName) + path.sep + node.source.value;
       const fileExists =
         fs.existsSync(target) ||
-        fs.existsSync(target + '.js' ) ||
+        fs.existsSync(target + '.js') ||
         fs.existsSync(target + path.sep + 'index.js');
 
       if (!fileExists) {
