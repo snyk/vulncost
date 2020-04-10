@@ -56,6 +56,12 @@ const testScenarios = [
     package: 'jquery',
     version: '3.2.1',
   },
+  {
+    name: 'CDNjs',
+    url: 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js',
+    package: 'jquery',
+    version: '3.4.1',
+  }
 ];
 
 testScenarios.map(scenario => {
