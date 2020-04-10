@@ -29,9 +29,11 @@ export function getPackages(fileName, source, language) {
   const packages = [];
   const visitor = {
     ImportDeclaration({ node }) {
-      const target = path.dirname(fileName) + '/' + node.source.value;
+      const target = path.dirname(fileName) + path.sep + node.source.value;
       const fileExists =
-        fs.existsSync(target) || fs.existsSync(target + '/index.js');
+        fs.existsSync(target) ||
+        fs.existsSync(target + '.js' ) ||
+        fs.existsSync(target + path.sep + 'index.js');
 
       if (!fileExists) {
         logger.log(`Found import declaration: ${node.source.value}`);
