@@ -7,7 +7,7 @@ const YANDEX = 'https://yastatic.net/';
 const BOOTSTRAP = 'https://stackpath.bootstrapcdn.com/';
 const pathBased = [MAXCDN, YANDEX, BOOTSTRAP];
 
-const JSDELIVR = 'https://cdn.jsdelivr.net/npm/';
+const JSDELIVR = 'https://cdn.jsdelivr.net/';
 const UNPKG = 'https://unpkg.com/';
 const atBased = [JSDELIVR, UNPKG];
 
@@ -44,7 +44,8 @@ function packageFromUrl(url) {
     let pkg = url
       .substring(isAtBased.length)
       .split('/')
-      .shift(); // ?
+      .find(str => str.includes('@'))
+
     return pkg;
   }
   return null;
