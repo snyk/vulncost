@@ -11,7 +11,8 @@
     "build": "webpack --mode production",
     "vscode:prepublish": "npm run check && npm run build",
     "webpack": "webpack --mode development",
-    "dev": "webpack --mode development --watch"
+    "dev": "webpack --mode development --watch",
+    "test": "jest ."
   },
   "author": "Remy Sharp <remy@leftlogic.com>",
   "engines": {
@@ -117,9 +118,12 @@
     "validate-npm-package-name": "^3.0.0"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.9.5",
     "@types/node": "^6.0.40",
     "@types/vscode": "^1.40.0",
+    "babel-jest": "^25.3.0",
     "eslint": "^6.8.0",
+    "jest": "^25.3.0",
     "nodemon": "^2.0.2",
     "prettier": "^1.19.1",
     "webpack": "^4.41.6",
