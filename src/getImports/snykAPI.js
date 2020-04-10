@@ -12,4 +12,8 @@ export const setToken = t => {
 
 export const getToken = () => token;
 
+export const clearToken = () => {
+  userConfig.delete('api');
+}
+
 export default token;

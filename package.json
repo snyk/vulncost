@@ -92,6 +92,10 @@
         "title": "Snyk: Signup/create a Snyk account"
       },
       {
+        "command": "vulnCost.signOut",
+        "title": "Snyk: Sign out"
+      },
+      {
         "command": "vulnCost.showOutput",
         "title": "Snyk: Show vulnerability report"
       }

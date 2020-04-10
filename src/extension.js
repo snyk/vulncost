@@ -9,7 +9,7 @@ import * as vscode from 'vscode';
 import { calculated, flushDecorations, clearDecorations, clearShown} from './decorator';
 import logger from './logger';
 import { SnykVulnInfo } from './SnykAction';
-import { isAuthed, setToken } from './getImports/snykAPI';
+import { isAuthed, setToken, clearToken } from './getImports/snykAPI';
 import { refreshDiagnostics } from './diagnostics';
 import { v4 as uuidv4 } from 'uuid';
 import authenticate from './authenticate';
@@ -85,6 +85,16 @@ export function activate(context) {
         }
 
         logger.flushWith(vuln.reportSummary.trim());
+      })
+    );
+
+    context.subscriptions.push(
+      commands.registerCommand('vulnCost.signOut', () => {
+        window.showInformationMessage('Removing auth token');
+
+        clearToken();
+
+        return;
       })
     );
 
