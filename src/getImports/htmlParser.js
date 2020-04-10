@@ -2,6 +2,8 @@
 const htmlparser2 = require('htmlparser2');
 
 const JQUERY = 'https://code.jquery.com/';
+const ASPNETCDN = 'https://ajax.aspnetcdn.com/ajax/';
+
 const MAXCDN = 'https://maxcdn.bootstrapcdn.com/';
 const YANDEX = 'https://yastatic.net/';
 const BOOTSTRAP = 'https://stackpath.bootstrapcdn.com/';
@@ -28,7 +30,8 @@ function packageFromUrl(url) {
 
   if (isPathBased) {
     let pkg = url.substring(isPathBased.length); // ?
-    const [name, version = 'latest'] = pkg.split('/');
+    const seperator = pkg.includes('/') ? '/' : '-';
+    const [name, version = 'latest'] = pkg.split(seperator);
     return `${name}@${version}`; // ?
   }
 
@@ -36,6 +39,12 @@ function packageFromUrl(url) {
     let pkg = url.substring(JQUERY.length); // ?
     const [name, ...version] = pkg.split('-');
     return `${name}@${version.join('-')}`; // ?
+  }
+
+  if (url.toLowerCase().startsWith(ASPNETCDN)) {
+    let pkg = url.substring(ASPNETCDN.length); // ?
+    const [name, ...version] = pkg.split('-');
+    return `${name.split('/').pop()}@${version.join('-')}`; // ?
   }
 
   const isAtBased = atBased.find(_ => url.toLowerCase().startsWith(_));

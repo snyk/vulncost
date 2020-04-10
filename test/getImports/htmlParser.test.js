@@ -8,6 +8,12 @@ const testScenarios = [
     version: '3.3.1',
   },
   {
+    name: 'ASP net CDN',
+    url: 'https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.2.1.min.js',
+    package: 'jquery',
+    version: '3.2.1',
+  },
+  {
     name: 'Stackpath',
     url:
       'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js',
