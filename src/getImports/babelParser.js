@@ -1,7 +1,10 @@
 import traverse from '@babel/traverse';
 import * as t from '@babel/types';
+import * as fs from 'fs';
+import * as path from 'path';
 import { parse as jsParse } from '@babel/parser';
 import { TYPESCRIPT } from './parser';
+import logger from '../logger';
 
 const PARSE_PLUGINS = [
   'jsx',
@@ -26,13 +29,20 @@ export function getPackages(fileName, source, language) {
   const packages = [];
   const visitor = {
     ImportDeclaration({ node }) {
-      packages.push({
-        fileName,
-        loc: node.source.loc,
-        name: node.source.value,
-        line: node.loc.end.line,
-        string: compileImportString(node),
-      });
+      const target = path.dirname(fileName) + '/' + node.source.value;
+      const fileExists =
+        fs.existsSync(target) || fs.existsSync(target + '/index.js');
+
+      if (!fileExists) {
+        logger.log(`Found import declaration: ${node.source.value}`);
+        packages.push({
+          fileName,
+          loc: node.source.loc,
+          name: node.source.value,
+          line: node.loc.end.line,
+          string: compileImportString(node),
+        });
+      }
     },
     CallExpression({ node }) {
       if (node.callee.name === 'require') {
