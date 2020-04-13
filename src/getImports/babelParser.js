@@ -2,6 +2,7 @@ import traverse from '@babel/traverse';
 import * as t from '@babel/types';
 import * as fs from 'fs';
 import * as path from 'path';
+import * as glob from 'glob';
 import { workspace } from 'vscode';
 import { parse as jsParse } from '@babel/parser';
 import { TYPESCRIPT } from './parser';
@@ -26,6 +27,40 @@ const PARSE_PLUGINS = [
 const PARSE_JS_PLUGINS = ['flow', ...PARSE_PLUGINS];
 const PARSE_TS_PLUGINS = ['typescript', ...PARSE_PLUGINS];
 
+const configuration = workspace.getConfiguration('vulnCost');
+const typescriptRegex = new RegExp(
+  configuration.typescriptExtensions.join('|')
+);
+const javascriptRegex = new RegExp(
+  configuration.javascriptExtensions.join('|')
+);
+
+/**
+ * @param {string} path
+ *
+ * @returns {boolean}
+ */
+function doesFileExist(path) {
+  const foundFiles = [
+    ...glob.sync(`${path}/index.*`),
+    ...glob.sync(`${path}.*`),
+  ];
+  if (!foundFiles.length) {
+    return false;
+  }
+  let fileExists = false;
+
+  for (let idx = 0; idx < foundFiles.length; idx++) {
+    const file = foundFiles[idx];
+    if (typescriptRegex.test(file) || javascriptRegex.test(file)) {
+      fileExists = true;
+      break;
+    }
+  }
+
+  return fileExists;
+}
+
 export function getPackages(fileName, source, language) {
   const packages = [];
   const visitor = {
@@ -38,7 +73,7 @@ export function getPackages(fileName, source, language) {
         pathIgnored = new RegExp(path).test(node.source.value);
 
         if (pathIgnored) {
-          continue;
+          break;
         }
       }
 
@@ -48,12 +83,8 @@ export function getPackages(fileName, source, language) {
       }
 
       const target = path.dirname(fileName) + path.sep + node.source.value;
-      const fileExists =
-        fs.existsSync(target) ||
-        fs.existsSync(target + '.js') ||
-        fs.existsSync(target + path.sep + 'index.js');
 
-      if (!fileExists) {
+      if (!doesFileExist(target)) {
         logger.log(`Found import declaration: ${node.source.value}`);
         packages.push({
           fileName,
