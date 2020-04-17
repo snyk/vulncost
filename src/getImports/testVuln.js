@@ -40,10 +40,14 @@ function testWithAuth(pkg) {
       ).replace(/\?.*$/, '');
 
       const vulns = res.data.vulnerabilities || [];
+
+      const uniqBasedOnId = new Set();
+      vulns.forEach(v => uniqBasedOnId.add(v.id));
+
       return {
         ...res.data,
         packageName,
-        count: vulns.length,
+        count: uniqBasedOnId.size,
         fixable: vulns.reduce((acc, curr) => {
           if (acc) return acc;
           if (curr.isUpgradable) return true;
