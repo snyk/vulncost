@@ -13,6 +13,8 @@ Receive feedback in-line with your code, such as how many vulnerabilities a pack
 
 ![Vuln Cost animation](https://raw.githubusercontent.com/snyk/vulncost/master/images/vulncost.gif)
 
+🔒 Your code and manifest files never leave your machine. Snyk only needs the dependency name and version to test against our constantly updated vulnerability database.
+
 ## Detect vulnerabilities in third-party open source packages automatically while you code.
 
 
