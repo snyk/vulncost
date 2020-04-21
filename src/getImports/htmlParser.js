@@ -2,12 +2,14 @@
 const htmlparser2 = require('htmlparser2');
 
 const JQUERY = 'https://code.jquery.com/';
+const ASPNETCDN = 'https://ajax.aspnetcdn.com/ajax/';
+
 const MAXCDN = 'https://maxcdn.bootstrapcdn.com/';
 const YANDEX = 'https://yastatic.net/';
 const BOOTSTRAP = 'https://stackpath.bootstrapcdn.com/';
 const pathBased = [MAXCDN, YANDEX, BOOTSTRAP];
 
-const JSDELIVR = 'https://cdn.jsdelivr.net/npm/';
+const JSDELIVR = 'https://cdn.jsdelivr.net/';
 const UNPKG = 'https://unpkg.com/';
 const atBased = [JSDELIVR, UNPKG];
 
@@ -28,7 +30,8 @@ function packageFromUrl(url) {
 
   if (isPathBased) {
     let pkg = url.substring(isPathBased.length); // ?
-    const [name, version = 'latest'] = pkg.split('/');
+    const seperator = pkg.includes('/') ? '/' : '-';
+    const [name, version = 'latest'] = pkg.split(seperator);
     return `${name}@${version}`; // ?
   }
 
@@ -38,13 +41,20 @@ function packageFromUrl(url) {
     return `${name}@${version.join('-')}`; // ?
   }
 
+  if (url.toLowerCase().startsWith(ASPNETCDN)) {
+    let pkg = url.substring(ASPNETCDN.length); // ?
+    const [name, ...version] = pkg.split('-');
+    return `${name.split('/').pop()}@${version.join('-')}`; // ?
+  }
+
   const isAtBased = atBased.find(_ => url.toLowerCase().startsWith(_));
 
   if (isAtBased) {
     let pkg = url
       .substring(isAtBased.length)
       .split('/')
-      .shift(); // ?
+      .find(str => str.includes('@'))
+
     return pkg;
   }
   return null;

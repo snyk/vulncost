@@ -41,12 +41,14 @@ Vuln Cost in HTML files:
 Vuln Cost scans HTML files and displays vulnerability information about the JavaScript packages you download from multiple CDN providers.
 
 #### Currently supported CDN's
-- unpkg.com
-- ajax.googleapis.com
-- cdn.jsdelivr.net
-- cdnjs.cloudflare.com
-- code.jquery.com
-- maxcdn.bootstrapcdn.com
+- [unpkg.com](https://unpkg.com/)
+- [ajax.googleapis.com](https://ajax.googleapis.com)
+- [cdn.jsdelivr.net](https://cdn.jsdelivr.net)
+- [cdnjs.cloudflare.com](https://cdnjs.cloudflare.com)
+- [code.jquery.com](https://code.jquery.com/)
+- [maxcdn.bootstrapcdn.com](https://www.bootstrapcdn.com/)
+- [yastatic.net](https://yastatic.net/)
+- [ajax.aspnetcdn.com](https://ajax.aspnetcdn.com)
 
 
 

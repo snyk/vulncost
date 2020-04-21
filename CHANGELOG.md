@@ -12,3 +12,10 @@ Readme update
 
 - White check once when scan is done without vulns found
 - Icon
+
+## 1.2.0
+
+- test: adds tests for html parser …
+- fix: adds support for assets hosted on github
+- feat: adds support for ajax.aspnet.com
+- test: adds CDNjs scenario
