@@ -1,6 +1,5 @@
 import traverse from '@babel/traverse';
 import * as t from '@babel/types';
-import * as fs from 'fs';
 import * as path from 'path';
 import * as glob from 'glob';
 import { workspace } from 'vscode';
