@@ -21,3 +21,4 @@ Readme update
 - test: adds CDNjs scenario
 - fix: do not scan local modules
 - feat: decorate dependencies in package.json
+- fix: consistent vuln count across auth/unauth requests
