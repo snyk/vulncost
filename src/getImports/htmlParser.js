@@ -53,7 +53,7 @@ function packageFromUrl(url) {
     let pkg = url
       .substring(isAtBased.length)
       .split('/')
-      .find(str => str.includes('@'))
+      .find(str => str.includes('@'));
 
     return pkg;
   }

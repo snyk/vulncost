@@ -41,6 +41,11 @@
       "type": "object",
       "title": "Snyk vulnerability cost configuration",
       "properties": {
+        "vulnCost.ignorePaths": {
+          "type": "array",
+          "default": [],
+          "description:": "Paths which should not be scanned"
+        },
         "vulnCost.typescriptExtensions": {
           "type": "array",
           "default": [
@@ -113,6 +118,7 @@
     "@snyk/configstore": "^3.2.0-rc1",
     "axios": "^0.19.2",
     "find-package-json": "^1.2.0",
+    "glob": "^7.1.6",
     "htmlparser2": "^4.1.0",
     "uuid": "^7.0.2",
     "validate-npm-package-name": "^3.0.0"

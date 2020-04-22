@@ -19,3 +19,4 @@ Readme update
 - fix: adds support for assets hosted on github
 - feat: adds support for ajax.aspnet.com
 - test: adds CDNjs scenario
+- fix: do not scan local modules
