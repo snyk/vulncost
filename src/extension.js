@@ -4,6 +4,7 @@ import {
   JAVASCRIPT,
   TYPESCRIPT,
   HTML,
+  PJSON,
 } from './getImports';
 import * as vscode from 'vscode';
 import { calculated, flushDecorations, clearDecorations, clearShown} from './decorator';
@@ -30,7 +31,7 @@ export function activate(context) {
       logger.log('🔓 Using anonymous API');
     }
 
-    [JAVASCRIPT, TYPESCRIPT, HTML].forEach(language => {
+    [JAVASCRIPT, TYPESCRIPT, HTML, PJSON].forEach(language => {
       context.subscriptions.push(
         vscode.languages.registerCodeActionsProvider(
           language,
@@ -217,6 +218,10 @@ function language({ fileName, languageId }) {
 
   if (languageId === 'html' || htmlRegex.test(fileName)) {
     return HTML;
+  }
+
+  if (languageId === 'json' && fileName.endsWith('package.json')) {
+    return PJSON;
   }
 
   return undefined;
