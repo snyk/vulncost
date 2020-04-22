@@ -11,7 +11,8 @@
     "build": "webpack --mode production",
     "vscode:prepublish": "npm run check && npm run build",
     "webpack": "webpack --mode development",
-    "dev": "webpack --mode development --watch"
+    "dev": "webpack --mode development --watch",
+    "test": "jest ."
   },
   "author": "Remy Sharp <remy@leftlogic.com>",
   "engines": {
@@ -25,7 +26,8 @@
     "onLanguage:javascriptreact",
     "onLanguage:typescript",
     "onLanguage:typescriptreact",
-    "onLanguage:html"
+    "onLanguage:html",
+    "onLanguage:json"
   ],
   "keywords": [
     "import",
@@ -40,6 +42,11 @@
       "type": "object",
       "title": "Snyk vulnerability cost configuration",
       "properties": {
+        "vulnCost.ignorePaths": {
+          "type": "array",
+          "default": [],
+          "description:": "Paths which should not be scanned"
+        },
         "vulnCost.typescriptExtensions": {
           "type": "array",
           "default": [
@@ -112,14 +119,18 @@
     "@snyk/configstore": "^3.2.0-rc1",
     "axios": "^0.19.2",
     "find-package-json": "^1.2.0",
+    "glob": "^7.1.6",
     "htmlparser2": "^4.1.0",
     "uuid": "^7.0.2",
     "validate-npm-package-name": "^3.0.0"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.9.5",
     "@types/node": "^6.0.40",
     "@types/vscode": "^1.40.0",
+    "babel-jest": "^25.3.0",
     "eslint": "^6.8.0",
+    "jest": "^25.3.0",
     "nodemon": "^2.0.2",
     "prettier": "^1.19.1",
     "webpack": "^4.41.6",
