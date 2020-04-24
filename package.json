@@ -4,9 +4,11 @@
   "description": "Display imported vulnerabilities in VS Code",
   "license": "MIT",
   "version": "1.1.1",
+  "private": true,
   "publisher": "snyk-security",
   "scripts": {
     "DISABLED_postinstall": "node ./node_modules/vscode/bin/install",
+    "release": "semantic-release",
     "check": "eslint src/* && prettier -c ./src/**/*",
     "build": "webpack --mode production",
     "vscode:prepublish": "npm run check && npm run build",
@@ -119,13 +121,14 @@
     "@snyk/configstore": "^3.2.0-rc1",
     "axios": "^0.19.2",
     "find-package-json": "^1.2.0",
-    "glob": "^7.1.6",
     "htmlparser2": "^4.1.0",
     "uuid": "^7.0.2",
     "validate-npm-package-name": "^3.0.0"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.9.5",
+    "@semantic-release/changelog": "^5.0.1",
+    "@semantic-release/git": "^9.0.0",
     "@types/node": "^6.0.40",
     "@types/vscode": "^1.40.0",
     "babel-jest": "^25.3.0",
@@ -133,6 +136,7 @@
     "jest": "^25.3.0",
     "nodemon": "^2.0.2",
     "prettier": "^1.19.1",
+    "semantic-release": "^17.0.7",
     "webpack": "^4.41.6",
     "webpack-cli": "^3.3.11"
   },
