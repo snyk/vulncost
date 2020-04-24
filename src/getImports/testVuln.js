@@ -2,6 +2,7 @@ import { isAuthed, getToken } from './snykAPI';
 import axios from 'axios';
 import logger from '../logger';
 import utm from '../utm';
+import statistics from '../statistics';
 
 const API_ROOT = 'https://snyk.io/api/v1/vuln/npm/';
 
@@ -63,6 +64,7 @@ function testWithAuth(pkg) {
 
 export default function test(pkg) {
   logger.log(`testing ${pkg.name}@${pkg.version}`);
+  statistics.sendTest(`${pkg.name}@${pkg.version} - authed: ${isAuthed()}`);
   if (isAuthed()) {
     return testWithAuth(pkg);
   } else {

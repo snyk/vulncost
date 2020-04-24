@@ -15,6 +15,7 @@ import { refreshDiagnostics } from './diagnostics';
 import { v4 as uuidv4 } from 'uuid';
 import authenticate from './authenticate';
 import utm from './utm';
+import statistics from './statistics';
 
 const { window, workspace, commands } = vscode;
 
@@ -24,12 +25,15 @@ let packageWatcher = {};
 export function activate(context) {
   try {
     logger.init(context);
+    statistics.init(context);
 
     if (isAuthed()) {
       logger.log('🔒 Using Snyk credentials');
     } else {
       logger.log('🔓 Using anonymous API');
     }
+
+    statistics.sendStartup('authed: ' + isAuthed());
 
     [JAVASCRIPT, TYPESCRIPT, HTML, PJSON].forEach(language => {
       context.subscriptions.push(
@@ -70,6 +74,7 @@ export function activate(context) {
     context.subscriptions.push(
       commands.registerCommand('vulnCost.toggle', () => {
         isActive = !isActive;
+        statistics.send('vulnCost.toggle', `active: ${isActive}`);
         if (isActive && window.activeTextEditor) {
           processActiveFile(window.activeTextEditor.document, diagnostics);
         } else {
@@ -81,6 +86,7 @@ export function activate(context) {
 
     context.subscriptions.push(
       commands.registerCommand('vulnCost.showOutput', vuln => {
+        statistics.send('vulnCost.showOutput', vuln.packageName);
         if (!vuln) {
           return logger.show();
         }
@@ -91,6 +97,7 @@ export function activate(context) {
 
     context.subscriptions.push(
       commands.registerCommand('vulnCost.signOut', () => {
+        statistics.send('vulnCost.signOut');
         window.showInformationMessage('Removing auth token');
 
         clearToken();
@@ -107,7 +114,7 @@ export function activate(context) {
           );
           return;
         }
-
+        statistics.send('vulnCost.signIn');
         const token = uuidv4();
         const url = `https://app.snyk.io/login?${utm}&token=${token}`;
 
@@ -129,6 +136,15 @@ export function activate(context) {
               window.showErrorMessage(e.message);
             });
         });
+      })
+    );
+
+    context.subscriptions.push(
+      commands.registerCommand('vulnCost.openVulnPage', pkg => {
+        statistics.send('vulnCost.openVulnPage', pkg);
+        const url = `https://snyk.io/test/npm/${pkg}?${utm}`;
+        vscode.env.openExternal(vscode.Uri.parse(url));
+        return;
       })
     );
   } catch (e) {

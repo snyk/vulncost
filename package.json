@@ -16,7 +16,7 @@
     "dev": "webpack --mode development --watch",
     "test": "jest ."
   },
-  "author": "Remy Sharp <remy@leftlogic.com>",
+  "author": "Snyk <vscode@snyk.io>",
   "engines": {
     "vscode": "^1.40.0"
   },
@@ -107,6 +107,10 @@
       {
         "command": "vulnCost.showOutput",
         "title": "Snyk: Show vulnerability report"
+      },
+      {
+        "command": "vulnCost.openVulnPage",
+        "title": "Snyk: Show vulnerability page"
       }
     ]
   },
@@ -122,7 +126,7 @@
     "axios": "^0.19.2",
     "find-package-json": "^1.2.0",
     "htmlparser2": "^4.1.0",
-    "uuid": "^7.0.2",
+    "uuid": "^7.0.3",
     "validate-npm-package-name": "^3.0.0"
   },
   "devDependencies": {

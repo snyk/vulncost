@@ -34,26 +34,8 @@ function createShowOutputAction(args) {
   return createSimpleAction({ command: 'vulnCost.showOutput', ...args });
 }
 
-function createOpenBrowserAction({
-  actionTitle,
-  title,
-  url,
-  isPreferred = false,
-  diagnostic,
-}) {
-  const action = new vscode.CodeAction(
-    actionTitle,
-    vscode.CodeActionKind.QuickFix
-  );
-
-  action.command = {
-    command: 'vscode.open',
-    title,
-    arguments: [vscode.Uri.parse(url)],
-  };
-  action.diagnostics = [diagnostic];
-  action.isPreferred = isPreferred;
-  return action;
+function createOpenVulnPageAction(args) {
+  return createSimpleAction({ command: 'vulnCost.openVulnPage', ...args });
 }
 
 /**
@@ -83,11 +65,12 @@ export class SnykVulnInfo {
         }
 
         res.push(
-          createOpenBrowserAction({
+          createOpenVulnPageAction({
             diagnostic,
-            url: `https://snyk.io/test/npm/${pkg}?${utm}`,
             actionTitle: 'Learn about this vulnerability',
             title: 'Learn about this vulnerability',
+            args: [pkg],
+            isPreferred: true,
           })
         );
 
