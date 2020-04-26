@@ -2,6 +2,18 @@ on:
   push:
 
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.PERSONAL_GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Install configuration
+        run: npm install @commitlint/config-conventional --no-save
+      - name: Lint commits
+        run: npm run lint:commits
   test:
     name: Test
     strategy:

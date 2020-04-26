@@ -9,11 +9,12 @@
   "scripts": {
     "DISABLED_postinstall": "node ./node_modules/vscode/bin/install",
     "release": "semantic-release",
-    "check": "eslint src/* && prettier -c ./src/**/*",
     "build": "webpack --mode production",
     "vscode:prepublish": "npm run check && npm run build",
     "webpack": "webpack --mode development",
     "dev": "webpack --mode development --watch",
+    "lint:style": "eslint src/* && prettier -c ./src/**/*",
+    "lint:commits": "npx commitlint --from=HEAD~10 --to=HEAD",
     "test": "jest ."
   },
   "author": "Remy Sharp <remy@leftlogic.com>",
@@ -127,6 +128,7 @@
   },
   "devDependencies": {
     "@babel/preset-env": "^7.9.5",
+    "@commitlint/config-conventional": "^8.3.4",
     "@semantic-release/changelog": "^5.0.1",
     "@semantic-release/git": "^9.0.0",
     "@types/node": "^6.0.40",
