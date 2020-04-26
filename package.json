@@ -3,7 +3,7 @@
   "displayName": "Vuln Cost",
   "description": "Display imported vulnerabilities in VS Code",
   "license": "MIT",
-  "version": "1.1.1",
+  "version": "1.2.5",
   "private": true,
   "publisher": "snyk-security",
   "scripts": {

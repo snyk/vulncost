@@ -1,5 +1,12 @@
 # Changes
 
+## [1.2.5](https://github.com/snyk/vulncost/compare/v1.2.4...v1.2.5) (2020-04-26)
+
+
+### Bug Fixes
+
+* adjust order of plugins ([6142427](https://github.com/snyk/vulncost/commit/614242738f43a51e92b7ae18c8fa6c8c3e9d5e1e))
+
 ## [1.2.4](https://github.com/snyk/vulncost/compare/v1.2.3...v1.2.4) (2020-04-26)
 
 
