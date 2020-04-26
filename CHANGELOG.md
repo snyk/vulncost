@@ -1,5 +1,12 @@
 # Changes
 
+## [1.2.2](https://github.com/snyk/vulncost/compare/v1.2.1...v1.2.2) (2020-04-26)
+
+
+### Bug Fixes
+
+* semantic-release iterate pkg.json version ([35cff53](https://github.com/snyk/vulncost/commit/35cff53ef3d568ae5eea8f355eb00abf6c3e1c0e))
+
 ## [1.2.1](https://github.com/snyk/vulncost/compare/v1.2.0...v1.2.1) (2020-04-26)
 
 
