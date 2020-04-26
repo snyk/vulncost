@@ -1,5 +1,12 @@
 # Changes
 
+## [1.2.3](https://github.com/snyk/vulncost/compare/v1.2.2...v1.2.3) (2020-04-26)
+
+
+### Bug Fixes
+
+* semantic-release reorder plugins and add --verbose output ([fb0bb6a](https://github.com/snyk/vulncost/commit/fb0bb6a58da2a275cb1ebf02996fba34020b7b34))
+
 ## [1.2.2](https://github.com/snyk/vulncost/compare/v1.2.1...v1.2.2) (2020-04-26)
 
 
