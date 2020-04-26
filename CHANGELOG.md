@@ -1,5 +1,12 @@
 # Changes
 
+## [1.2.4](https://github.com/snyk/vulncost/compare/v1.2.3...v1.2.4) (2020-04-26)
+
+
+### Bug Fixes
+
+* include package.json in git ([54004e1](https://github.com/snyk/vulncost/commit/54004e113cf337e75308b46878bbebd7ac12bb1d))
+
 ## [1.2.3](https://github.com/snyk/vulncost/compare/v1.2.2...v1.2.3) (2020-04-26)
 
 
