@@ -1,5 +1,24 @@
 # Changes
 
+# [1.2.0](https://github.com/snyk/vulncost/compare/v1.1.0...v1.2.0) (2020-04-26)
+
+
+### Bug Fixes
+
+* [#19](https://github.com/snyk/vulncost/issues/19) consistent vuln count across auth/unauth requests ([b2c5a16](https://github.com/snyk/vulncost/commit/b2c5a167522e511f30e3685fdb2c9cc493aff89a))
+* adds support for assets hosted on github ([fb383b4](https://github.com/snyk/vulncost/commit/fb383b47a36a8d8d67b071c58342083a434ae4f3))
+* do not scan local modules ([21c5934](https://github.com/snyk/vulncost/commit/21c5934aac3494be657a1e9274e3f0cc8e10a358))
+* prevent npm publication ([647c3ff](https://github.com/snyk/vulncost/commit/647c3ff0ca1b63f121ebcb597676fb0341b40ad2))
+* supports eg/file.js ([5b1c6a0](https://github.com/snyk/vulncost/commit/5b1c6a05b95a4360551b8f671335ee7c1e49d94b))
+
+
+### Features
+
+* adds Command to remove auth token from local config ([7baa5f8](https://github.com/snyk/vulncost/commit/7baa5f8983162c66ee00affeac957682db32942b))
+* adds setting to ignore based on paths ([748c178](https://github.com/snyk/vulncost/commit/748c178867700ec0d07e5a02f1a5cb20abb75db2))
+* adds support for ajax.aspnet.com ([241bc45](https://github.com/snyk/vulncost/commit/241bc45833cf7223f479a28b64a8597fd4af5da0))
+* use js|typescript config regex ([4113c0f](https://github.com/snyk/vulncost/commit/4113c0f38b682eaadf1f6f98f1e9900099ad2a66))
+
 ## 1.0.0
 
 Initial release
