@@ -33,19 +33,6 @@
 * adds support for ajax.aspnet.com ([241bc45](https://github.com/snyk/vulncost/commit/241bc45833cf7223f479a28b64a8597fd4af5da0))
 * use js|typescript config regex ([4113c0f](https://github.com/snyk/vulncost/commit/4113c0f38b682eaadf1f6f98f1e9900099ad2a66))
 
-## 1.0.0
-
-Initial release
-
-## 1.0.1
-
-Readme update
-
-## 1.1.0
-
-- White check once when scan is done without vulns found
-- Icon
-
 ## 1.2.0
 
 - test: adds tests for html parser …
@@ -55,3 +42,16 @@ Readme update
 - fix: do not scan local modules
 - feat: decorate dependencies in package.json
 - fix: consistent vuln count across auth/unauth requests
+
+## 1.1.0
+
+- White check once when scan is done without vulns found
+- Icon
+
+## 1.0.1
+
+Readme update
+
+## 1.0.0
+
+Initial release
