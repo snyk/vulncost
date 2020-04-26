@@ -1,5 +1,12 @@
 # Changes
 
+## [1.2.1](https://github.com/snyk/vulncost/compare/v1.2.0...v1.2.1) (2020-04-26)
+
+
+### Bug Fixes
+
+* removes OS file ([d2ee3b6](https://github.com/snyk/vulncost/commit/d2ee3b60c44bf4e6bd0d5aaddb5e8938692a650a))
+
 # [1.2.0](https://github.com/snyk/vulncost/compare/v1.1.0...v1.2.0) (2020-04-26)
 
 
