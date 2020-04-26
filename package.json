@@ -8,7 +8,7 @@
   "publisher": "snyk-security",
   "scripts": {
     "DISABLED_postinstall": "node ./node_modules/vscode/bin/install",
-    "release": "semantic-release --debug",
+    "release": "semantic-release",
     "check": "eslint src/* && prettier -c ./src/**/*",
     "build": "webpack --mode production",
     "vscode:prepublish": "npm run check && npm run build",
