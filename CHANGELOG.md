@@ -1,5 +1,13 @@
 # Changes
 
+## [1.3.1](https://github.com/snyk/vulncost/compare/v1.3.0...v1.3.1) (2020-04-28)
+
+
+### Bug Fixes
+
+* removed unused import ([aacd908](https://github.com/snyk/vulncost/commit/aacd908f68967736dffdac38256f4e6661eb6b7b))
+* update package-lock.json ([7b6c5ba](https://github.com/snyk/vulncost/commit/7b6c5baaaf2d5b9fad90b38154aa4597ead91113))
+
 # [1.3.0](https://github.com/snyk/vulncost/compare/v1.2.5...v1.3.0) (2020-04-28)
 
 
