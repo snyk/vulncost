@@ -53,16 +53,7 @@
 * adds setting to ignore based on paths ([748c178](https://github.com/snyk/vulncost/commit/748c178867700ec0d07e5a02f1a5cb20abb75db2))
 * adds support for ajax.aspnet.com ([241bc45](https://github.com/snyk/vulncost/commit/241bc45833cf7223f479a28b64a8597fd4af5da0))
 * use js|typescript config regex ([4113c0f](https://github.com/snyk/vulncost/commit/4113c0f38b682eaadf1f6f98f1e9900099ad2a66))
-
-## 1.2.0
-
-- test: adds tests for html parser …
-- fix: adds support for assets hosted on github
-- feat: adds support for ajax.aspnet.com
-- test: adds CDNjs scenario
-- fix: do not scan local modules
-- feat: decorate dependencies in package.json
-- fix: consistent vuln count across auth/unauth requests
+* decorate dependencies in package.json ([c472e62](https://github.com/snyk/vulncost/commit/c472e62b33885cc1950b5e0a0fb794953557efb7))
 
 ## 1.1.0
 
