@@ -1,5 +1,13 @@
 # Changes
 
+# [1.3.0](https://github.com/snyk/vulncost/compare/v1.2.5...v1.3.0) (2020-04-28)
+
+
+### Features
+
+* improve labels ([1c80dfb](https://github.com/snyk/vulncost/commit/1c80dfbf8fb0231788f799cf4a5dcb0050c7c10e))
+* sending statistics to analyse user flow ([f85070d](https://github.com/snyk/vulncost/commit/f85070ded51f1b9e198e9283ebcb1365e15ee748))
+
 ## [1.2.5](https://github.com/snyk/vulncost/compare/v1.2.4...v1.2.5) (2020-04-26)
 
 
