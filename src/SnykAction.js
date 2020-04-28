@@ -49,16 +49,25 @@ export class SnykVulnInfo {
       .map(diagnostic => {
         const pkg = getPackageFromMessage(diagnostic.message);
         const vulns = getPackageFromCache(pkg);
-
+        const count = vulns.count;
         const res = [];
 
         if (isAuthed()) {
           res.push(
             createShowOutputAction({
               diagnostic,
-              actionTitle: 'Show vulnerability details',
+              actionTitle: `Fix vuln${count === 1 ? '' : 's'}`,
               title: 'Show vulnerability details',
               args: [vulns],
+              isPreferred: true,
+            })
+          );
+        } else {
+          res.push(
+            createAuthAction({
+              diagnostic,
+              actionTitle: `Fix vuln${count === 1 ? '' : 's'}`,
+              title: 'Connect to Snyk',
               isPreferred: true,
             })
           );
@@ -83,17 +92,6 @@ export class SnykVulnInfo {
         //     })
         //   );
         // }
-
-        if (!isAuthed()) {
-          res.push(
-            createAuthAction({
-              diagnostic,
-              actionTitle: 'Connect Snyk to fix vulnerabilities',
-              title: 'Connect to Snyk',
-              isPreferred: true,
-            })
-          );
-        }
 
         return res;
       })
