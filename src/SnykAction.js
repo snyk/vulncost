@@ -1,6 +1,5 @@
 import * as vscode from 'vscode';
 import { isAuthed } from './getImports/snykAPI';
-import utm from './utm';
 import { getPackageFromCache } from './getImports/packageInfo';
 import { KEY_MENTION, getPackageFromMessage } from './diagnostics';
 
