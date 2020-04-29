@@ -1,5 +1,12 @@
 # Changes
 
+## [1.3.2](https://github.com/snyk/vulncost/compare/v1.3.1...v1.3.2) (2020-04-29)
+
+
+### Bug Fixes
+
+* property to disable sending anonymous statistics ([e4e14d4](https://github.com/snyk/vulncost/commit/e4e14d4b7d5ad30fa9f07901f5527467ba185ba9))
+
 ## [1.3.1](https://github.com/snyk/vulncost/compare/v1.3.0...v1.3.1) (2020-04-28)
 
 
