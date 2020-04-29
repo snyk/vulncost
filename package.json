@@ -42,7 +42,7 @@
   "contributes": {
     "configuration": {
       "type": "object",
-      "title": "Snyk vulnerability cost configuration",
+      "title": "Vuln Cost",
       "properties": {
         "vulnCost.ignorePaths": {
           "type": "array",
@@ -74,6 +74,11 @@
           "type": "boolean",
           "default": true,
           "description": "Display the decoration when starting to check vulnerability"
+        },
+        "vulnCost.sendStatistics": {
+          "type": "boolean",
+          "default": true,
+          "description": "Send anonymous statistics on extension usage to server"
         },
         "vulnCost.debug": {
           "type": "boolean",

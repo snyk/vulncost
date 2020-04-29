@@ -20,6 +20,7 @@ class Statistics {
 
   init(context) {
     this.context = context;
+
     this.userid = context.globalState.get('userid');
     logger.log('userid found: ' + this.userid);
 
@@ -57,25 +58,30 @@ class Statistics {
   }
 
   send(action, comment) {
-    logger.log(`sending stats action:[${action}], comment:[${comment}]`);
-    const message = {
-      "meta": meta,
-      "time": new Date().getTime(),
-      "item": {
-        "user": this.userid,
-        "app": extensionInfo.name + ' ' + extensionInfo.version,
-        "action": action,
-        "comment": comment
-      }
-    };
+    const configuration = vscode.workspace.getConfiguration('vulnCost');
 
-    instance.post('api/log', message)
-      .then(response => {
-        logger.log(`response: ${response.status} on message ${message.action} - ${message.comment}`);
-      })
-      .catch(error => {
-        logger.log(`error: ${error} on message ${message.action} - ${message.comment}`);
-      });
+    if (configuration.sendStatistics) {
+      logger.log(`sending stats action:[${action}], comment:[${comment}]`);
+
+      const message = {
+        "meta": meta,
+        "time": new Date().getTime(),
+        "item": {
+          "user": this.userid,
+          "app": extensionInfo.name + ' ' + extensionInfo.version,
+          "action": action,
+          "comment": comment
+        }
+      };
+
+      instance.post('api/log', message)
+        .then(response => {
+          logger.log(`response: ${response.status} on message ${message.action} - ${message.comment}`);
+        })
+        .catch(error => {
+          logger.log(`error: ${error} on message ${message.action} - ${message.comment}`);
+        });
+    }
   }
 }
 
