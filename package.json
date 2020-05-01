@@ -14,7 +14,9 @@
     "vscode:prepublish": "npm run check && npm run build",
     "webpack": "webpack --mode development",
     "dev": "webpack --mode development --watch",
-    "test": "jest ."
+    "test": "jest .",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "author": "Snyk <vscode@snyk.io>",
   "engines": {
@@ -132,7 +134,8 @@
     "find-package-json": "^1.2.0",
     "htmlparser2": "^4.1.0",
     "uuid": "^7.0.3",
-    "validate-npm-package-name": "^3.0.0"
+    "validate-npm-package-name": "^3.0.0",
+    "snyk": "^1.316.1"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.9.5",
@@ -164,5 +167,6 @@
   "icon": "images/vuln-cost-logo.png",
   "directories": {
     "test": "test"
-  }
+  },
+  "snyk": true
 }
