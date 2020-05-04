@@ -1,5 +1,12 @@
 # Changes
 
+## [1.3.4](https://github.com/snyk/vulncost/compare/v1.3.3...v1.3.4) (2020-05-04)
+
+
+### Bug Fixes
+
+* display vulns only on dependencies in package.json ([a976345](https://github.com/snyk/vulncost/commit/a9763452ecec4871c2976324ef21e679ca5661a8))
+
 ## [1.3.3](https://github.com/snyk/vulncost/compare/v1.3.2...v1.3.3) (2020-05-04)
 
 
