@@ -12,3 +12,21 @@ patch:
         patched: '2020-05-01T05:50:53.898Z'
     - '@babel/traverse > @babel/helper-function-name > @babel/template > @babel/types > lodash':
         patched: '2020-05-01T05:50:53.898Z'
+    - '@babel/types > lodash':
+        patched: '2020-05-07T09:02:29.251Z'
+    - '@babel/traverse > lodash':
+        patched: '2020-05-07T09:02:29.251Z'
+    - '@babel/traverse > @babel/types > lodash':
+        patched: '2020-05-07T09:02:29.251Z'
+    - '@babel/traverse > @babel/generator > lodash':
+        patched: '2020-05-07T09:02:29.251Z'
+    - '@babel/traverse > @babel/generator > @babel/types > lodash':
+        patched: '2020-05-07T09:02:29.251Z'
+    - '@babel/traverse > @babel/helper-function-name > @babel/types > lodash':
+        patched: '2020-05-07T09:02:29.251Z'
+    - '@babel/traverse > @babel/helper-split-export-declaration > @babel/types > lodash':
+        patched: '2020-05-07T09:02:29.251Z'
+    - '@babel/traverse > @babel/helper-function-name > @babel/helper-get-function-arity > @babel/types > lodash':
+        patched: '2020-05-07T09:02:29.251Z'
+    - '@babel/traverse > @babel/helper-function-name > @babel/template > @babel/types > lodash':
+        patched: '2020-05-07T09:02:29.251Z'
