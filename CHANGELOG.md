@@ -1,5 +1,12 @@
 # Changes
 
+## [1.3.6](https://github.com/snyk/vulncost/compare/v1.3.5...v1.3.6) (2020-05-14)
+
+
+### Bug Fixes
+
+* change title and text for marketplace ([d8da115](https://github.com/snyk/vulncost/commit/d8da1155ba8834153fea9d5490ce08bb3d35b06a))
+
 ## [1.3.5](https://github.com/snyk/vulncost/compare/v1.3.4...v1.3.5) (2020-05-07)
 
 
