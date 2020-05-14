@@ -8,8 +8,9 @@
 
 ## Vulnerability scanning in VS Code
 
-Find security vulnerabilities in open source npm packages while you code.
-Receive feedback in-line with your code, such as how many vulnerabilities a package contains that you are importing.
+Find security vulnerabilities in open source packages while you code in JavaScript, TypeScript and HTML.
+Receive feedback in-line with your code, such as how many vulnerabilities a package contains that you are importing. And most important, suggesting a fix if known vulnerabilities are found.
+If you like the extension, we’d love it if you could [rate it](https://marketplace.visualstudio.com/items?itemName=snyk-security.vscode-vuln-cost&ssr=false#review-details).
 
 ![Vuln Cost animation](https://raw.githubusercontent.com/snyk/vulncost/master/images/vulncost.gif)
 
