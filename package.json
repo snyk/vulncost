@@ -1,7 +1,7 @@
 {
   "name": "vscode-vuln-cost",
-  "displayName": "Vuln Cost",
-  "description": "Display imported vulnerabilities in VS Code",
+  "displayName": "Vuln Cost - Security Scanner",
+  "description": "Security Scanner to find and fix vulnerabilities in JavaScript and TypeScript. Inspired by Import Cost",
   "license": "MIT",
   "version": "1.3.5",
   "private": true,
