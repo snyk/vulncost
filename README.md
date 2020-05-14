@@ -1,6 +1,6 @@
 # Vuln Cost - Security Scanner for VS Code
 
-![Known Vulnerabilities](https://snyk.io/test/github/snyk/vulncost/badge.svg)
+![Known Vulnerabilities](https://snyk.io/test/github/snyk/vulncost/badge.svg) ![Installs](https://vsmarketplacebadge.apphb.com/installs-short/snyk-security.vscode-vuln-cost.svg)
 
 - [Homepage](https://snyk.io/security-scanner-vuln-cost/)
 - [Github repository](https://github.com/snyk/vulncost)
