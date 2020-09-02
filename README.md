@@ -1,6 +1,17 @@
-# Vuln Cost - Security Scanner for VS Code
+<p align="center"><a href="https://github.com/snyk/vulncost"><img src="https://raw.githubusercontent.com/snyk/vulncost/master/images/vuln_cost_logo_animated.gif" alt="Vuln Cost Animated Logo" height="60"/></a></p>
+<h1 align="center">Vuln Cost</h1>
+<p align="center">The world's easiest, Security Scanner for VS Code</p>
 
-![Known Vulnerabilities](https://snyk.io/test/github/snyk/vulncost/badge.svg) ![Installs](https://vsmarketplacebadge.apphb.com/installs-short/snyk-security.vscode-vuln-cost.svg)
+<p align="center">
+	<a href="https://snyk.io/test/github/snyk/vulncost"><img src="https://snyk.io/test/github/snyk/vulncost/badge.svg"/></a>
+  <a href="https://marketplace.visualstudio.com/items?itemName=snyk-security.vscode-vuln-cost"><img src="https://vsmarketplacebadge.apphb.com/installs-short/snyk-security.vscode-vuln-cost.svg"/></a>
+</p><br/><br/>
+
+<p align="center">
+  <a href="https://marketplace.visualstudio.com/items?itemName=snyk-security.vscode-vuln-cost"><img src="https://raw.githubusercontent.com/snyk/vulncost/master/images/vulncost.gif"/></a>
+</p>
+
+## Vuln Cost - Security Scanner for VS Code
 
 - [Homepage](https://snyk.io/security-scanner-vuln-cost/)
 - [Github repository](https://github.com/snyk/vulncost)
