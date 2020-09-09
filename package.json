@@ -135,7 +135,7 @@
     "htmlparser2": "^4.1.0",
     "uuid": "^7.0.3",
     "validate-npm-package-name": "^3.0.0",
-    "snyk": "^1.319.1"
+    "snyk": "^1.378.0"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.9.5",
