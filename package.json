@@ -130,7 +130,7 @@
     "@babel/traverse": "^7.0.0",
     "@babel/types": "^7.0.0",
     "@snyk/configstore": "^3.2.0-rc1",
-    "axios": "^0.19.2",
+    "axios": "^0.20.0",
     "find-package-json": "^1.2.0",
     "htmlparser2": "^4.1.0",
     "uuid": "^7.0.3",
