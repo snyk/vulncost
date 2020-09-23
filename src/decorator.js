@@ -47,8 +47,8 @@ function getDecorationMessage(packageInfo) {
     return '';
   }
 
-  const { count } = packageInfo.vulns;
-  let decorationMessage = `${count} vuln${count === 1 ? '' : 's'} (click to fix)`;
+  const { count, fixable } = packageInfo.vulns;
+  const decorationMessage = `${count} vuln${count === 1 ? '' : 's'}${fixable ? ' (click to fix)' : ''}`;
 
   return decorationMessage;
 }
