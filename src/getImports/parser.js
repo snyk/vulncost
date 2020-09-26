@@ -6,6 +6,7 @@ export const TYPESCRIPT = 'typescript';
 export const JAVASCRIPT = 'javascript';
 export const HTML = 'html';
 export const PJSON = 'json';
+export const YAML = 'yaml';
 
 export function getPackages(fileName, source, language) {
   if ([TYPESCRIPT, JAVASCRIPT].includes(language)) {

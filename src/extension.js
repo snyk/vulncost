@@ -5,9 +5,10 @@ import {
   TYPESCRIPT,
   HTML,
   PJSON,
+  YAML
 } from './getImports';
 import * as vscode from 'vscode';
-import { calculated, flushDecorations, clearDecorations, clearShown} from './decorator';
+import { calculated, calculatedIaC, flushDecorations, clearDecorations, clearShown, flushIaCDecorations, applyIaCDiagnostics} from './decorator';
 import logger from './logger';
 import { SnykVulnInfo } from './SnykAction';
 import { isAuthed, setToken, clearToken } from './getImports/snykAPI';
@@ -35,7 +36,7 @@ export function activate(context) {
 
     statistics.sendStartup('authed: ' + isAuthed());
 
-    [JAVASCRIPT, TYPESCRIPT, HTML, PJSON].forEach(language => {
+    [JAVASCRIPT, TYPESCRIPT, HTML, PJSON, YAML].forEach(language => {
       context.subscriptions.push(
         vscode.languages.registerCodeActionsProvider(
           language,
@@ -54,7 +55,7 @@ export function activate(context) {
     context.subscriptions.push(diagnostics);
 
     workspace.onDidChangeTextDocument(
-      ev => isActive && processActiveFile(ev.document, diagnostics)
+      ev => ev && isActive && processActiveFile(ev.document, diagnostics)
     );
     window.onDidChangeActiveTextEditor(
       ev => ev && isActive && processActiveFile(ev.document, diagnostics)
@@ -180,6 +181,11 @@ function createPackageWatcher(fileName) {
 let emitters = {};
 async function processActiveFile(document, diagnostics) {
   if (document && language(document)) {
+    if (language(document) === YAML && document.isDirty) {
+      // in case changes were made to the file but it isn't saved - remove all IaC visuals
+      diagnostics.clear();
+      return;
+    }
     const { fileName } = document;
     if (emitters[fileName]) {
       emitters[fileName].removeAllListeners();
@@ -191,19 +197,27 @@ async function processActiveFile(document, diagnostics) {
       language(document)
     );
 
-    emitters[fileName].on('package', createPackageWatcher);
     emitters[fileName].on('error', e =>
       logger.log(`vulnCost error: ${e.stack}`)
     );
-    emitters[fileName].on('start', packages => {
-      flushDecorations(fileName, packages);
-    });
-    emitters[fileName].on('calculated', packageInfo => {calculated(packageInfo);});
-
-    emitters[fileName].on('done', packages => {
-      flushDecorations(fileName, packages, true);
-      refreshDiagnostics(document, diagnostics, packages);
-    });
+    if (language(document) !== YAML) {
+      emitters[fileName].on('package', createPackageWatcher);
+      emitters[fileName].on('calculated', packageInfo => {calculated(packageInfo);});
+      emitters[fileName].on('start', packages => {
+        flushDecorations(fileName, packages);
+      });
+      emitters[fileName].on('done', packages => {
+        flushDecorations(fileName, packages, true);
+        refreshDiagnostics(document, diagnostics, packages);
+      });
+    }
+    else { // IaC
+      emitters[fileName].on('start', () => {
+        diagnostics.clear();
+        flushIaCDecorations(fileName, diagnostics, document);
+      });
+      emitters[fileName].on('calculatedIaC', issue => {calculatedIaC(issue, diagnostics, document);});
+    }
   }
 }
 
@@ -216,6 +230,7 @@ function language({ fileName, languageId }) {
     configuration.javascriptExtensions.join('|')
   );
   const htmlRegex = new RegExp(configuration.htmlExtensions.join('|'));
+  const iacRegex = new RegExp(configuration.infrastructureAsCodeExtensions.join('|'));
   if (
     languageId === 'typescript' ||
     languageId === 'typescriptreact' ||
@@ -238,6 +253,10 @@ function language({ fileName, languageId }) {
 
   if (languageId === 'json' && fileName.endsWith('package.json')) {
     return PJSON;
+  }
+
+  if (languageId === 'yaml' || iacRegex.test(fileName)) {
+    return YAML;
   }
 
   return undefined;

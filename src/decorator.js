@@ -1,10 +1,12 @@
 import { workspace, window, Range, Position, ThemeColor } from 'vscode';
 import logger from './logger';
+import * as vscode from 'vscode';
 
 const decorations = {};
+const iacDiagnostics = {};
 let shown = {};
 
-export function flushDecorations(fileName, packages, displayCheck = false) {
+export function flushDecorations(fileName, packages=[], displayCheck = false) {
   // logger.log(`Flushing decorations`);
   decorations[fileName] = {};
   packages.forEach(packageInfo => {
@@ -20,6 +22,18 @@ export function flushDecorations(fileName, packages, displayCheck = false) {
   refreshDecorations(fileName);
 }
 
+export function applyIaCDiagnostics(fileName, diagnostics, document) {
+  if (iacDiagnostics[fileName]) {
+    diagnostics.set(document.uri, iacDiagnostics[fileName]);
+  }
+}
+
+export function flushIaCDecorations(fileName, diagnostics, document) {
+  decorations[fileName] = {};
+  iacDiagnostics[fileName] = [];
+  refreshDecorations(fileName);
+}
+
 export function calculated(packageInfo, displayCheck = false) {
   const decorationMessage = getDecorationMessage(packageInfo);
 
@@ -30,6 +44,11 @@ export function calculated(packageInfo, displayCheck = false) {
   } else {
     decorate(decorationMessage, packageInfo);
   }
+}
+
+export function calculatedIaC(issue, diagnostics, document) {
+  decorateIaC(issue, document);
+  applyIaCDiagnostics(document.fileName, diagnostics, document);
 }
 
 export function clearShown() {
@@ -99,5 +118,33 @@ function getEditors(fileName) {
 export function clearDecorations() {
   window.visibleTextEditors.forEach(textEditor => {
     return textEditor.setDecorations(decorationType, []);
+  });
+}
+
+export function decorateIaC(issue, document) {
+  const { fileName, title, lineNumber } = issue;
+
+  let severity = vscode.DiagnosticSeverity.Error;
+  if (issue.severity === 'medium') {
+    severity = vscode.DiagnosticSeverity.Warning;
+  }
+  if (issue.severity === 'low') {
+    severity = vscode.DiagnosticSeverity.Information;
+  }
+
+  const issueRange = new Range(new vscode.Position(lineNumber - 1, 0), new vscode.Position(lineNumber - 1, 1024));
+  const relatedInformation = [];
+  if (issue.description) {
+    relatedInformation.push(
+      new vscode.DiagnosticRelatedInformation(new vscode.Location(document.uri, issueRange), issue.description)
+    )
+  }
+  iacDiagnostics[fileName].push({
+    code: '',
+    message: title,
+    range: issueRange,
+    severity,
+    source: '🔒 VulnCost',
+    relatedInformation,
   });
 }

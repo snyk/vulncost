@@ -31,7 +31,8 @@
     "onLanguage:typescript",
     "onLanguage:typescriptreact",
     "onLanguage:html",
-    "onLanguage:json"
+    "onLanguage:json",
+    "onLanguage:yaml"
   ],
   "keywords": [
     "import",
@@ -71,6 +72,23 @@
             "\\.html?$"
           ],
           "description": "File extensions to be parsed by the HTML parser"
+        },
+        "vulnCost.infrastructureAsCodeConfigurationIssue": {
+          "type": "boolean",
+          "default": false,
+          "description": "IaC files should be scanned for configuration issues"
+        },
+        "vulnCost.infrastructureAsCodeImageVulnerabilities": {
+          "type": "boolean",
+          "default": false,
+          "description": "IaC files should be scanned for image vulnerabilities"
+        },
+        "vulnCost.infrastructureAsCodeExtensions": {
+          "type": "array",
+          "default": [
+            "\\.yaml?$"
+          ],
+          "description": "File extensions to be parsed by the IaC parser"
         },
         "vulnCost.showDecoration": {
           "type": "boolean",
