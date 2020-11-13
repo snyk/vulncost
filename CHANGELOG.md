@@ -1,5 +1,13 @@
 # Changes
 
+## [1.3.7](https://github.com/snyk/vulncost/compare/v1.3.6...v1.3.7) (2020-11-13)
+
+
+### Bug Fixes
+
+* updating deps ([0566a3d](https://github.com/snyk/vulncost/commit/0566a3de4885cd04ca172122c5e25fea8cf6e5b0))
+* updating deps ([2ce0fdb](https://github.com/snyk/vulncost/commit/2ce0fdb90867a360d3210fc2fcaa75e9d5138bdd))
+
 ## [1.3.6](https://github.com/snyk/vulncost/compare/v1.3.5...v1.3.6) (2020-05-14)
 
 
