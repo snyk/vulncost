@@ -126,16 +126,15 @@
     "trailingComma": "es5"
   },
   "dependencies": {
-    "@babel/parser": "^7.0.0",
-    "@babel/traverse": "^7.0.0",
-    "@babel/types": "^7.0.0",
+    "@babel/parser": "^7.12.5",
+    "@babel/traverse": "^7.12.5",
+    "@babel/types": "^7.12.5",
     "@snyk/configstore": "^3.2.0-rc1",
-    "axios": "^0.19.2",
+    "axios": "0.21.0",
     "find-package-json": "^1.2.0",
     "htmlparser2": "^4.1.0",
     "uuid": "^7.0.3",
-    "validate-npm-package-name": "^3.0.0",
-    "snyk": "^1.319.1"
+    "validate-npm-package-name": "^3.0.0"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.9.5",
