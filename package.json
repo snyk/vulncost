@@ -14,9 +14,7 @@
     "vscode:prepublish": "npm run check && npm run build",
     "webpack": "webpack --mode development",
     "dev": "webpack --mode development --watch",
-    "test": "jest .",
-    "snyk-protect": "snyk protect",
-    "prepare": "npm run snyk-protect"
+    "test": "jest ."
   },
   "author": "Snyk <vscode@snyk.io>",
   "engines": {
