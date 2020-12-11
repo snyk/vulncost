@@ -124,9 +124,9 @@
     "trailingComma": "es5"
   },
   "dependencies": {
-    "@babel/parser": "^7.12.5",
-    "@babel/traverse": "^7.12.5",
-    "@babel/types": "^7.12.5",
+    "@babel/parser": "^7.12.7",
+    "@babel/traverse": "^7.12.7",
+    "@babel/types": "^7.12.7",
     "@snyk/configstore": "^3.2.0-rc1",
     "axios": "0.21.0",
     "find-package-json": "^1.2.0",
