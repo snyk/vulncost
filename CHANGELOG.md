@@ -1,5 +1,12 @@
 # Changes
 
+## [1.3.8](https://github.com/snyk/vulncost/compare/v1.3.7...v1.3.8) (2021-01-04)
+
+
+### Bug Fixes
+
+* package.json & package-lock.json to reduce vulnerabilities ([fd3931b](https://github.com/snyk/vulncost/commit/fd3931baee2f36934690af41cf2e5dca55fe56df))
+
 ## [1.3.7](https://github.com/snyk/vulncost/compare/v1.3.6...v1.3.7) (2020-11-13)
 
 
