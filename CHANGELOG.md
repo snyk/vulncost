@@ -1,5 +1,12 @@
 # Changes
 
+## [1.3.10](https://github.com/snyk/vulncost/compare/v1.3.9...v1.3.10) (2021-01-13)
+
+
+### Bug Fixes
+
+* upgrade multiple dependencies with Snyk ([4478590](https://github.com/snyk/vulncost/commit/4478590a7476bd0a512270dba7e932d0c7eb11ca))
+
 ## [1.3.9](https://github.com/snyk/vulncost/compare/v1.3.8...v1.3.9) (2021-01-04)
 
 
