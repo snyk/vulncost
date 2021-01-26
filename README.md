@@ -4,7 +4,8 @@
 
 <p align="center">
 	<a href="https://snyk.io/test/github/snyk/vulncost"><img src="https://snyk.io/test/github/snyk/vulncost/badge.svg"/></a>
-  <a href="https://marketplace.visualstudio.com/items?itemName=snyk-security.vscode-vuln-cost"><img src="https://vsmarketplacebadge.apphb.com/installs-short/snyk-security.vscode-vuln-cost.svg"/></a>
+  <a href="https://marketplace.visualstudio.com/items?itemName=snyk-security.vscode-vuln-cost"><img src="https://vsmarketplacebadge.apphb.com/installs-short/snyk-security.vscode-vuln-cost.svg"/></a>  <a href="https://marketplace.visualstudio.com/items?itemName=snyk-security.vscode-vuln-cost"><img alt="Visual Studio Marketplace Version" src="https://img.shields.io/visual-studio-marketplace/v/snyk-security.vscode-vuln-cost?label=Marketplace&logo=visual-studio-code"></a>
+	
 </p><br/><br/>
 
 <p align="center">
@@ -22,8 +23,6 @@
 Find security vulnerabilities in open source packages while you code in JavaScript, TypeScript and HTML.
 Receive feedback in-line with your code, such as how many vulnerabilities a package contains that you are importing. And most important, suggesting a fix if known vulnerabilities are found.
 If you like the extension, we’d love it if you could [rate it](https://marketplace.visualstudio.com/items?itemName=snyk-security.vscode-vuln-cost&ssr=false#review-details).
-
-![Vuln Cost animation](https://raw.githubusercontent.com/snyk/vulncost/master/images/vulncost.gif)
 
 🔒 Your code and manifest files never leave your machine. Snyk only needs the dependency name and version to test against our constantly updated vulnerability database.
 
