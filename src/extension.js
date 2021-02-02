@@ -142,7 +142,7 @@ export function activate(context) {
     context.subscriptions.push(
       commands.registerCommand('vulnCost.openVulnPage', pkg => {
         statistics.send('vulnCost.openVulnPage', pkg);
-        const url = `https://snyk.io/test/npm/${pkg}?${utm}`;
+        const url = `https://snyk.io/advisor/npm-package/${pkg}?${utm}`;
         vscode.env.openExternal(vscode.Uri.parse(url));
         return;
       })
