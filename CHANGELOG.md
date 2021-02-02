@@ -1,5 +1,12 @@
 # Changes
 
+# [1.4.0](https://github.com/snyk/vulncost/compare/v1.3.11...v1.4.0) (2021-02-02)
+
+
+### Features
+
+* directing people to the snyk advisor page for better package information ([2bdd9e8](https://github.com/snyk/vulncost/commit/2bdd9e8eba4f04320adaa4f40c303eeb7ce19b22))
+
 ## [1.3.11](https://github.com/snyk/vulncost/compare/v1.3.10...v1.3.11) (2021-01-26)
 
 
