@@ -5,12 +5,13 @@ import logger from '../logger';
 
 import { DebounceError, debouncePromise } from './debouncePromise';
 import report from '../report';
+import axios from 'axios';
 
 let cache = {};
 let vulnCache = {};
 const projectCache = {};
 
-export function getPackageKey(pkg) {
+export async function getPackageKey(pkg) {
   if (pkg.version && pkg.name) {
     return { name: pkg.name, version: pkg.version };
   }
@@ -29,13 +30,20 @@ export function getPackageKey(pkg) {
   let packageInfo = f.next().value;
 
   // if the package doesn't start with the package name we were looking for
-  // then it means it's not locally installed, so let's assume they're going
-  // to install and set version to "latest"
+  // then it means it's not locally installed, so let's get the version from the
+  // npm registry
   if (!packageInfo.name || !packageInfo.name.toLowerCase().startsWith(name)) {
-    packageInfo = {
-      name,
-      version: 'latest',
-    };
+    try {
+      const res = await axios.get(`https://registry.npmjs.org/${name}`);
+      const version = res.data['dist-tags']['latest'];
+
+      return { name, version };
+    } catch (err) {
+      return {
+        name,
+        version: 'latest',
+      };
+    }
   }
 
   return { name: packageInfo.name, version: packageInfo.version };
@@ -57,9 +65,9 @@ export function getPackageFromCache(key) {
 export async function getPackageInfo(pkg) {
   try {
     if (pkg.string) {
-      cache[pkg.string] = cache[pkg.string] || getPackageKey(pkg);
+      cache[pkg.string] = cache[pkg.string] || (await getPackageKey(pkg));
     } else {
-      cache[pkg.string] = getPackageKey(pkg);
+      cache[pkg.string] = await getPackageKey(pkg);
     }
   } catch (e) {
     logger.log(e.message);
