@@ -1,10 +1,8 @@
-import { isAuthed, getToken } from './snykAPI';
 import axios from 'axios';
 import logger from '../logger';
-import utm from '../utm';
 import statistics from '../statistics';
-
-const API_ROOT = 'https://snyk.io/api/v1/vuln/npm/';
+import utm from '../utm';
+import { getToken, isAuthed } from './snykAPI';
 
 function testNoAuth(key) {
   return axios
@@ -12,7 +10,7 @@ function testNoAuth(key) {
     .then(({ data }) => {
       if (typeof data === 'string') {
         // bug on snyk's side, returning a string for 404
-        logger.log('bad return on ' + key);
+        logger.log(`bad return on ${key}`);
         throw new Error('bad return from snyk api (unauthed)');
       }
 
@@ -24,36 +22,28 @@ function testNoAuth(key) {
     });
 }
 
-function testWithAuth(pkg) {
-  const encodedName = encodeURIComponent(pkg.name + '@' + pkg.version);
-  // options.vulnEndpoint is only used by `snyk protect` (i.e. local filesystem tests)
-  const url = API_ROOT + encodedName + '?' + utm;
+function testWithAuth({ name, version }) {
+  const encodedName = encodeURIComponent(name);
+  const url = `https://snyk.io/api/v1/test/npm/${encodedName}/${version}?${utm}`;
+
   return axios
     .get(url, {
       headers: {
         'x-is-ci': false,
-        authorization: 'token ' + getToken(),
+        authorization: `token ${getToken()}`,
       },
     })
     .then(res => {
-      const packageName = decodeURIComponent(
-        res.request.res.responseUrl.replace(API_ROOT, '')
-      ).replace(/\?.*$/, '');
-
-      const vulns = res.data.vulnerabilities || [];
-
+      const vulnerabilities = res.data.issues.vulnerabilities || [];
       const uniqBasedOnId = new Set();
-      vulns.forEach(v => uniqBasedOnId.add(v.id));
+      vulnerabilities.forEach(v => uniqBasedOnId.add(v.id));
+      const fixable = vulnerabilities.some(({ isUpgradable }) => isUpgradable);
 
       return {
-        ...res.data,
-        packageName,
+        vulnerabilities,
+        packageName: `${name}@${version}`,
         count: uniqBasedOnId.size,
-        fixable: vulns.reduce((acc, curr) => {
-          if (acc) return acc;
-          if (curr.isUpgradable) return true;
-          return false;
-        }, false),
+        fixable,
       };
     })
     .catch(e => {
