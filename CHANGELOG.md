@@ -1,5 +1,12 @@
 # Changes
 
+# [1.5.0](https://github.com/snyk/vulncost/compare/v1.4.0...v1.5.0) (2021-04-20)
+
+
+### Features
+
+* Migrate from legacy /vuln endpoint to /test ([1170fd7](https://github.com/snyk/vulncost/commit/1170fd704ac39c45ad9d034fe935562bc5dcd1a8))
+
 # [1.4.0](https://github.com/snyk/vulncost/compare/v1.3.11...v1.4.0) (2021-02-02)
 
 
