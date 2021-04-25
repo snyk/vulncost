@@ -19,7 +19,7 @@ A dropdown menu opens.
 VSCode will ask if you want to open the External Link. You must open the external link to continue. 
 ![Open The External Website - Vuln Cost](https://user-images.githubusercontent.com/1719499/113234978-2bd32500-9257-11eb-9d21-70a02abcfa1b.png)
 4. Click Open. 
-An **Authenticate for CLI** prompt appears. This is because the Snyk CLI tool performs the underlying lookups to determine whether your packages are known vulnerable. ![Authenticate for CLI - Vuln Cost](https://user-images.githubusercontent.com/1719499/113234976-2b3a8e80-9257-11eb-8eda-ba02a7e40569.png)
+An **Authenticate for CLI** prompt appears. The Snyk CLI authorization flow will be used when you authenticate, and your VulnCost use will appear as an instance of the Snyk CLI Client in the Snyk web interface, if you also use that. ![Authenticate for CLI - Vuln Cost](https://user-images.githubusercontent.com/1719499/113234976-2b3a8e80-9257-11eb-8eda-ba02a7e40569.png)
 5. Click **Authenticate** to allow the Snyk CLI to scan your package versions.
 An **Authenticated** screen should appear. If it doesn’t, reload the page and try again. ![Authenticated - Vuln Cost](https://user-images.githubusercontent.com/1719499/113234975-2aa1f800-9257-11eb-9043-2c823e40279f.png)
 6. Click in the name of your package and select **Fix Vulns** again, and you will now see direct and indirect vulnerabilities known to affect your package version, as well as a version to upgrade to for possible remediation in the **Output** panel of VSCode. 
