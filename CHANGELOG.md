@@ -1,5 +1,33 @@
 # Changes
 
+# [1.5.0](https://github.com/snyk/vulncost/compare/v1.4.0...v1.5.0) (2021-04-20)
+
+
+### Features
+
+* Migrate from legacy /vuln endpoint to /test ([1170fd7](https://github.com/snyk/vulncost/commit/1170fd704ac39c45ad9d034fe935562bc5dcd1a8))
+
+# [1.4.0](https://github.com/snyk/vulncost/compare/v1.3.11...v1.4.0) (2021-02-02)
+
+
+### Features
+
+* directing people to the snyk advisor page for better package information ([2bdd9e8](https://github.com/snyk/vulncost/commit/2bdd9e8eba4f04320adaa4f40c303eeb7ce19b22))
+
+## [1.3.11](https://github.com/snyk/vulncost/compare/v1.3.10...v1.3.11) (2021-01-26)
+
+
+### Bug Fixes
+
+* upgrade multiple dependencies with Snyk ([021e9db](https://github.com/snyk/vulncost/commit/021e9dbbed87bd20e157c1779394ab1e8485a7c1))
+
+## [1.3.10](https://github.com/snyk/vulncost/compare/v1.3.9...v1.3.10) (2021-01-13)
+
+
+### Bug Fixes
+
+* upgrade multiple dependencies with Snyk ([4478590](https://github.com/snyk/vulncost/commit/4478590a7476bd0a512270dba7e932d0c7eb11ca))
+
 ## [1.3.9](https://github.com/snyk/vulncost/compare/v1.3.8...v1.3.9) (2021-01-04)
 
 

@@ -75,8 +75,8 @@ export class SnykVulnInfo {
         res.push(
           createOpenVulnPageAction({
             diagnostic,
-            actionTitle: 'Learn about this vulnerability',
-            title: 'Learn about this vulnerability',
+            actionTitle: 'Learn about this package',
+            title: 'Learn about this package',
             args: [pkg],
             isPreferred: true,
           })
