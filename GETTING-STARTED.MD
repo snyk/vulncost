@@ -6,7 +6,7 @@ You can tell the extension is successfully installed by opening your `package.js
 # Viewing Vulnerability Details
 Click within the name of a dependency that lists a number of vulns, and a blue extension icon will appear in the left margin of VSCode. When you click the extension icon, a dropdown appears with two options: **Fix Vulns** or **Learn about this package**.  
 
-If you select **Fix Vulns**,  VSCode asks if you would like to go to the external webpage. If you haven’t authorized Snyk CLI since installing the extension, you will need to [authorize your account](#authorizing-your-account) to actually see fix options. If you have already authorized Snyk CLI, the **Output** panel lists direct and indirect vulnerabilities known to affect your package version, as well as a version to upgrade to for possible remediation. 
+If you select **Fix Vulns**,  VSCode asks if you would like to go to the external webpage. If you haven’t authorized Snyk CLI since installing the extension, you will need to [authorize your account](#authorizing-your-account) to actually see fix options. If you don't have an account yet, you can create a free account to authorize. If you have already authorized Snyk CLI, the **Output** panel lists direct and indirect vulnerabilities known to affect your package version, as well as a version to upgrade to for possible remediation. 
 
 If you select  **Learn about this package**, VSCode asks if you would like to go to the external webpage, and agreeing takes you to the Snyk Advisor page for that package.  
 
