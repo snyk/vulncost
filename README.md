@@ -18,6 +18,9 @@
 - [Github repository](https://github.com/snyk/vulncost)
 - [Issues](https://github.com/snyk/vulncost/issues)
 
+## Getting started
+- [Getting started guide](https://github.com/snyk/vulncost/blob/master/GETTING-STARTED.MD)
+
 ## Vulnerability scanning in VS Code
 
 Find security vulnerabilities in open source packages while you code in JavaScript, TypeScript and HTML.
