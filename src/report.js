@@ -1,4 +1,4 @@
-const sort = ['high', 'medium', 'low'];
+const sort = ['critical', 'high', 'medium', 'low'];
 const sortBy = (a, b) => {
   return sort.indexOf(a.severity) - sort.indexOf(b.severity);
 };
@@ -11,7 +11,7 @@ export const summary = pkg => {
         acc[sort.indexOf(curr.severity)]++;
         return acc;
       },
-      [0, 0, 0] // relies on the order of high, medium, low (based on `sort`)
+      [0, 0, 0] // relies on the order of critical, high, medium, low (based on `sort`)
     )
     .map((_, i) => `${_} ${sort[i]}`) // remaps to include the severit type
     .filter(_ => _[0] !== '0') // drop those starting with zero
