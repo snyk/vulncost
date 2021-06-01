@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`report should return a well formatted report 1`] = `
+"
+=== goof@1.0.1 ===
+
+Indirect:
+Low my-first-pkg in loaded-via-pkg
+- https://snyk.io/vuln/UNIQ-VULN-ID
+
+No remediation available."
+`;
