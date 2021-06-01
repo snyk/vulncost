@@ -4,6 +4,11 @@ const sortBy = (a, b) => {
 };
 const ucFirst = _ => `${_[0].toUpperCase()}${_.slice(1)}`;
 
+/**
+ *
+ * @param {object} pkg
+ * @returns {string} User formatted summary
+ */
 export const summary = pkg => {
   const message = pkg.vulns.vulnerabilities
     .reduce(
@@ -11,7 +16,7 @@ export const summary = pkg => {
         acc[sort.indexOf(curr.severity)]++;
         return acc;
       },
-      [0, 0, 0] // relies on the order of critical, high, medium, low (based on `sort`)
+      [0, 0, 0, 0] // relies on the order of critical, high, medium, low (based on `sort`)
     )
     .map((_, i) => `${_} ${sort[i]}`) // remaps to include the severit type
     .filter(_ => _[0] !== '0') // drop those starting with zero
@@ -24,6 +29,7 @@ export const summary = pkg => {
  *
  * @param {string} tested Tested module in format package@version
  * @param {data} data Vulnerability data via test/api
+ * @returns {string} User formatted report
  */
 export default function report(tested, data) {
   const dedupe = [];
