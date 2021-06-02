@@ -1,5 +1,12 @@
 # Changes
 
+# [1.6.0](https://github.com/snyk/vulncost/compare/v1.5.0...v1.6.0) (2021-06-02)
+
+
+### Features
+
+* adds support for critical severity ([76d2035](https://github.com/snyk/vulncost/commit/76d20357e6e5ae4a6166e68e5b591b3dbb9917ac))
+
 # [1.5.0](https://github.com/snyk/vulncost/compare/v1.4.0...v1.5.0) (2021-04-20)
 
 

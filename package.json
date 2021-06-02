@@ -3,7 +3,7 @@
   "displayName": "Vuln Cost - Security Scanner",
   "description": "Security Scanner to find and fix vulnerabilities in JavaScript and TypeScript. Inspired by Import Cost",
   "license": "MIT",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "private": true,
   "publisher": "snyk-security",
   "scripts": {
