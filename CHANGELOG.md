@@ -1,5 +1,12 @@
 # Changes
 
+## [1.6.1](https://github.com/snyk/vulncost/compare/v1.6.0...v1.6.1) (2021-09-17)
+
+
+### Bug Fixes
+
+* package.json & package-lock.json to reduce vulnerabilities ([f6561c7](https://github.com/snyk/vulncost/commit/f6561c777bca8a6c2f4ba0dc2eb1670012fbea20))
+
 # [1.6.0](https://github.com/snyk/vulncost/compare/v1.5.0...v1.6.0) (2021-06-02)
 
 
