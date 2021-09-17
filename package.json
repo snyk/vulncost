@@ -128,7 +128,7 @@
     "@babel/traverse": "^7.12.12",
     "@babel/types": "^7.12.12",
     "@snyk/configstore": "^3.2.0-rc1",
-    "axios": "0.21.1",
+    "axios": "0.21.3",
     "find-package-json": "^1.2.0",
     "htmlparser2": "^4.1.0",
     "uuid": "^7.0.3",
