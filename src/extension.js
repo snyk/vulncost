@@ -18,6 +18,7 @@ import utm from './utm';
 import statistics from './statistics';
 
 const { window, workspace, commands } = vscode;
+const deprecationNoteKey = 'deepcode.deprecationNoteMonth';
 
 let isActive = true;
 let packageWatcher = {};
@@ -26,6 +27,8 @@ export function activate(context) {
   try {
     logger.init(context);
     statistics.init(context);
+
+    void showDeprecationNotification(context);
 
     if (isAuthed()) {
       logger.log('🔒 Using Snyk credentials');
@@ -241,4 +244,21 @@ function language({ fileName, languageId }) {
   }
 
   return undefined;
+}
+
+async function showDeprecationNotification(context) {
+  const currentMonth = new Date().getMonth();
+  const lastMessageMonth = context.globalState.get(deprecationNoteKey);
+
+  if (!lastMessageMonth || currentMonth != lastMessageMonth) {
+    context.globalState.update(deprecationNoteKey, currentMonth);
+
+    const deprecationMessage = `The VulnCost extension is deprecated. Please use [Snyk Vulnerability Scanner](command:workbench.extensions.search?%22snyk-security.snyk-vulnerability-scanner%22) with included VulnCost's functionality and more.`;
+    const installCommandText = 'Install Snyk Vulnerability Scanner';
+
+    const selected = await vscode.window.showInformationMessage(deprecationMessage, installCommandText);
+    if (selected === installCommandText) {
+      vscode.commands.executeCommand('workbench.extensions.search', 'snyk-security.snyk-vulnerability-scanner');
+    }
+  }
 }
