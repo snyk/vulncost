@@ -1,5 +1,6 @@
 # Latest update 🗞️ (start here first 👇)
-Vuln Cost is no longer being actively maintained. While you can continue to use this extension until it is officially deprecated, we recommend you install the [official Snyk extension](https://marketplace.visualstudio.com/items?itemName=snyk-security.snyk-vulnerability-scanner). This new extension provides all the functionality supported by Vuln Cost and enables you to find and fix issues in both your open source dependencies AND your custom code.
+Vuln Cost is no longer being actively maintained. While you can continue to use this extension until it is officially deprecated, we recommend you install [the official Snyk extension](https://marketplace.visualstudio.com/items?itemName=snyk-security.snyk-vulnerability-scanner). This new extension provides all the functionality supported by Vuln Cost and enables you to find and fix issues in both your open source dependencies AND your custom code.
+
 
 <p align="center"><a href="https://github.com/snyk/vulncost"><img src="https://raw.githubusercontent.com/snyk/vulncost/master/images/vuln_cost_logo_animated.gif" alt="Vuln Cost Animated Logo" height="60"/></a></p>
 <h1 align="center">Vuln Cost</h1>

@@ -1,5 +1,12 @@
 # Changes
 
+## [1.7.1](https://github.com/snyk/vulncost/compare/v1.7.0...v1.7.1) (2021-11-26)
+
+
+### Bug Fixes
+
+* add link to official Snyk extension ([266c818](https://github.com/snyk/vulncost/commit/266c81812d8a3cd73af7f3172f2b585cbb2600a6))
+
 # [1.7.0](https://github.com/snyk/vulncost/compare/v1.6.1...v1.7.0) (2021-11-26)
 
 
