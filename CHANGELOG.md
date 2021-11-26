@@ -1,5 +1,12 @@
 # Changes
 
+# [1.7.0](https://github.com/snyk/vulncost/compare/v1.6.1...v1.7.0) (2021-11-26)
+
+
+### Features
+
+* show deprecation notification ([26f2a8e](https://github.com/snyk/vulncost/commit/26f2a8e01656654a8c5f3e6e642062369088aba6))
+
 ## [1.6.1](https://github.com/snyk/vulncost/compare/v1.6.0...v1.6.1) (2021-09-17)
 
 
