@@ -131,7 +131,7 @@
     "axios": "0.21.3",
     "find-package-json": "^1.2.0",
     "htmlparser2": "^4.1.0",
-    "uuid": "^7.0.3",
+    "uuid": "^8.3.2",
     "validate-npm-package-name": "^3.0.0"
   },
   "devDependencies": {
